@@ -1,0 +1,6 @@
+server:
+  tomcat:
+    connection-timeout: 20s
+  forward-headers-strategy: framework
+merlin:
+  open-ai-api-key: key

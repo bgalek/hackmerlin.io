@@ -1,0 +1,41 @@
+import { useForm } from "@mantine/form";
+import { Button, TextInput } from "@mantine/core";
+
+interface MerlinPasswordFormProps {
+  disabled: boolean;
+  onSubmit: (prompt: string, reset: () => void) => void;
+}
+
+export function MerlinPasswordForm({
+  disabled,
+  onSubmit,
+}: MerlinPasswordFormProps) {
+  const form = useForm({
+    initialValues: {
+      password: "",
+    },
+  });
+  return (
+    <form
+      onSubmit={form.onSubmit((values) =>
+        onSubmit(values.password, form.reset)
+      )}
+    >
+      <TextInput
+        label="Enter the secret password"
+        placeholder="SECRET_PASSWORD"
+        {...form.getInputProps("password")}
+      />
+      <Button
+        disabled={disabled}
+        variant="light"
+        color="green"
+        type="submit"
+        fullWidth
+        mt="sm"
+      >
+        Submit
+      </Button>
+    </form>
+  );
+}

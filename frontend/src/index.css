@@ -1,0 +1,9 @@
+body {
+  background: url("./assets/bg.png");
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
