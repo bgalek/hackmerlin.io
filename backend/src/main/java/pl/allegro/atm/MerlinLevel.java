@@ -11,11 +11,11 @@ public interface MerlinLevel {
     ChatCompletionRequest prompt(String prompt);
 
     default boolean outputFilter(String output) {
-        return true;
+        return false;
     }
 
     default boolean inputFilter(String input) {
-        return true;
+        return false;
     }
 
     default String inputFilterResponse() {
