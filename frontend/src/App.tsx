@@ -23,11 +23,10 @@ export default function App() {
         <Paper withBorder shadow="md" p={30} radius="md">
           <MerlinPrompt
             disabled={merlin.question.isLoading}
-            onSubmit={(prompt, reset) => {
+            onSubmit={(prompt) => {
               merlin.question.mutate(prompt, {
                 onSuccess: (result) => {
                   setResponse(result);
-                  reset();
                 },
                 onError: () => {
                   notifications.show({
@@ -51,7 +50,7 @@ export default function App() {
                 onSuccess: (result) => {
                   notifications.show({
                     title: "Nice work!",
-                    message: "Proceding to the next level!",
+                    message: "Proceeding to the next level!",
                   });
                   queryClient.setQueryData(["session"], () => ({
                     currentLevel: result.currentLevel,

@@ -6,9 +6,9 @@ merlin:
   open-ai-api-key: key
 spring:
   session:
-    jdbc:
-      initialize-schema: ALWAYS
-      cleanup-cron: 0 0 1 * * *
-  datasource:
-    hikari:
-      max-lifetime: 600000 # 10 minutes
+    store-type: none
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+      - org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration

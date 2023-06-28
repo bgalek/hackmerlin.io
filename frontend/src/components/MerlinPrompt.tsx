@@ -36,11 +36,14 @@ export default function MerlinPrompt({
       <Textarea
         data-autofocus
         mt="sm"
-        placeholder="Tell me something insightful about life."
+        placeholder="Tell me s  omething insightful about life."
         withAsterisk
-        maxLength={100}
+        maxLength={200}
         minRows={4}
-        onKeyDown={getHotkeyHandler([["mod+Enter", () => handleSubmit()]])}
+        onKeyDown={getHotkeyHandler([
+          ["mod+Enter", () => handleSubmit()],
+          ["Enter", () => handleSubmit()],
+        ])}
         {...form.getInputProps("prompt")}
       />
       <Button disabled={disabled} type="submit" fullWidth mt="sm">
