@@ -7,3 +7,5 @@ spring:
   datasource:
     hikari:
       max-lifetime: 600000 # 10 minutes
+  autoconfigure:
+    exclude: [ ]

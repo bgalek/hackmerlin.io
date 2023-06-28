@@ -5,7 +5,6 @@ import com.theokanning.openai.completion.chat.ChatCompletionResult;
 import com.theokanning.openai.completion.chat.ChatMessage;
 import com.theokanning.openai.service.OpenAiService;
 import org.springframework.stereotype.Component;
-import pl.allegro.atm.MerlinLevel;
 
 import java.util.List;
 

@@ -5,6 +5,8 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/api")
 class MerlinApiController {
@@ -20,8 +22,8 @@ class MerlinApiController {
         return new MerlinSessionResponse(
                 session.getId(),
                 merlinService.getCurrentLevel(session),
-                merlinService.getMaxLevel()
-        );
+                merlinService.getMaxLevel(),
+                Optional.ofNullable(System.getenv("FLY_ALLOC_ID")).orElse("local"));
     }
 
     @PostMapping(value = "/question", consumes = "text/plain")
@@ -29,7 +31,7 @@ class MerlinApiController {
         if (prompt.length() > 150) throw new IllegalArgumentException("Prompt too long");
         int currentLevel = merlinService.getCurrentLevel(session);
         String response = merlinService.respond(currentLevel, prompt);
-        return ResponseEntity.ok(response.substring(0, 100));
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping(value = "/submit", consumes = "text/plain")
@@ -40,12 +42,13 @@ class MerlinApiController {
             return ResponseEntity.ok(new MerlinSessionResponse(
                     session.getId(),
                     merlinService.getCurrentLevel(session),
-                    merlinService.getMaxLevel()
+                    merlinService.getMaxLevel(),
+                    Optional.ofNullable(System.getenv("FLY_ALLOC_ID")).orElse("local")
             ));
         }
         return ResponseEntity.badRequest().build();
     }
 
-    record MerlinSessionResponse(String id, int currentLevel, int maxLevel) {
+    record MerlinSessionResponse(String id, int currentLevel, int maxLevel, String instanceId) {
     }
 }

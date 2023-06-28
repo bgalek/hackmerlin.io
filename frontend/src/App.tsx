@@ -72,7 +72,7 @@ export default function App() {
       </FocusTrap>
       <Center>
         <Text fz="xs" m="sm" color="dimmed">
-          {session.data.id}@{APP_VERSION}
+          {session.data.id}@{session.data.instanceId}
         </Text>
       </Center>
     </MerlinLayout>

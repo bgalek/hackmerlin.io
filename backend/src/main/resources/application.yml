@@ -6,7 +6,7 @@ merlin:
   open-ai-api-key: key
 spring:
   session:
-    store-type: none
+    store-type: memory
   autoconfigure:
     exclude:
       - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration

@@ -2,6 +2,7 @@ package pl.allegro.atm;
 
 import com.theokanning.openai.service.OpenAiService;
 import jakarta.servlet.http.HttpSession;
+import pl.allegro.atm.levels.MerlinLevel;
 
 import java.util.Optional;
 

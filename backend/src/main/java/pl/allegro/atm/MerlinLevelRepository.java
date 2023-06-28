@@ -1,5 +1,7 @@
 package pl.allegro.atm;
 
+import pl.allegro.atm.levels.MerlinLevel;
+
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
