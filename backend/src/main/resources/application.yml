@@ -4,3 +4,8 @@ server:
   forward-headers-strategy: framework
 merlin:
   open-ai-api-key: key
+spring:
+  session:
+    jdbc:
+      initialize-schema: ALWAYS
+      cleanup-cron: 0 0 1 * * *
