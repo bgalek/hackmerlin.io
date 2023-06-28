@@ -2,6 +2,8 @@ server:
   tomcat:
     connection-timeout: 20s
   forward-headers-strategy: framework
+  error:
+    include-message: always
 merlin:
   open-ai-api-key: key
 spring:

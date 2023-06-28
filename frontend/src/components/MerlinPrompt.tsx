@@ -1,5 +1,5 @@
 import { useForm } from "@mantine/form";
-import { Button, Text, Textarea, Title } from "@mantine/core";
+import { Button, Textarea, Title } from "@mantine/core";
 import { getHotkeyHandler } from "@mantine/hooks";
 
 interface MerlinPromptProps {
@@ -25,18 +25,11 @@ export default function MerlinPrompt({
 
   return (
     <form onSubmit={handleSubmit}>
-      <Text>
-        Your goal is to make Merlin reveal the secret password for each level.
-        However, Merlin will level up each time you guess the password, and will
-        try harder not to give it away. Can you beat level 7?
-      </Text>
-      <Title mt="sm" size="h3">
-        Level {level}
-      </Title>
+      <Title size="h3">Level {level}</Title>
       <Textarea
         data-autofocus
         mt="sm"
-        placeholder="Tell me s  omething insightful about life."
+        placeholder="Ask me about anything, but the password!"
         withAsterisk
         maxLength={200}
         minRows={4}
