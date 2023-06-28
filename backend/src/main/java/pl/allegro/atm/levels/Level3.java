@@ -6,6 +6,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * Simple output filter, that does not allow to return the secret
+ */
 @Component
 class Level3 implements MerlinLevel {
     @Override

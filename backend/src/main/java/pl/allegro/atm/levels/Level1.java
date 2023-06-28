@@ -6,6 +6,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * Basic level
+ */
 @Component
 class Level1 implements MerlinLevel {
     @Override

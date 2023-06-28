@@ -6,6 +6,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * Basic level, telling model to not reveal the secret
+ */
 @Component
 class Level2 implements MerlinLevel {
     @Override

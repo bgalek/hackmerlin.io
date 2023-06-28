@@ -6,6 +6,6 @@ spring:
       cleanup-cron: 0 0 1 * * *
   datasource:
     hikari:
-      max-lifetime: 600000 # 10 minutes
+      max-lifetime: 300000 # 5 minutes
   autoconfigure:
     exclude: [ ]
