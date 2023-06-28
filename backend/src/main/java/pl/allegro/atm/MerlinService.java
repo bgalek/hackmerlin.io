@@ -45,4 +45,8 @@ public class MerlinService {
     public int getCurrentLevel(HttpSession session) {
         return Optional.ofNullable(session.getAttribute("level")).map(x -> (Integer) x).orElse(1);
     }
+
+    public int getMaxLevel() {
+        return merlinLevelRepository.count();
+    }
 }

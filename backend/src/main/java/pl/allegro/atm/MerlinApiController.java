@@ -17,7 +17,11 @@ class MerlinApiController {
 
     @GetMapping(value = "/user")
     public MerlinSessionResponse level(HttpSession session) {
-        return new MerlinSessionResponse(merlinService.getCurrentLevel(session));
+        return new MerlinSessionResponse(
+                session.getId(),
+                merlinService.getCurrentLevel(session),
+                merlinService.getMaxLevel()
+        );
     }
 
     @PostMapping(value = "/question", consumes = "text/plain")
@@ -25,7 +29,7 @@ class MerlinApiController {
         if (prompt.length() > 150) throw new IllegalArgumentException("Prompt too long");
         int currentLevel = merlinService.getCurrentLevel(session);
         String response = merlinService.respond(currentLevel, prompt);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(response.substring(0, 100));
     }
 
     @PostMapping(value = "/submit", consumes = "text/plain")
@@ -33,11 +37,15 @@ class MerlinApiController {
         if (password.length() > 150) throw new IllegalArgumentException("Password too long");
         if (merlinService.checkSecret(session, password)) {
             merlinService.advanceLevel(session);
-            return ResponseEntity.ok(new MerlinSessionResponse(merlinService.getCurrentLevel(session)));
+            return ResponseEntity.ok(new MerlinSessionResponse(
+                    session.getId(),
+                    merlinService.getCurrentLevel(session),
+                    merlinService.getMaxLevel()
+            ));
         }
         return ResponseEntity.badRequest().build();
     }
 
-    record MerlinSessionResponse(int currentLevel) {
+    record MerlinSessionResponse(String id, int currentLevel, int maxLevel) {
     }
 }

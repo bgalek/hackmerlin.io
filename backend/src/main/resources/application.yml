@@ -9,3 +9,6 @@ spring:
     jdbc:
       initialize-schema: ALWAYS
       cleanup-cron: 0 0 1 * * *
+  datasource:
+    hikari:
+      max-lifetime: 600000 # 10 minutes

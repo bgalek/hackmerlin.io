@@ -12,4 +12,7 @@ export default defineConfig({
       "/api": "http://localhost:8080",
     },
   },
+  define: {
+    APP_VERSION: JSON.stringify(process.env["FLY_ALLOC_ID"] || "local"),
+  },
 });

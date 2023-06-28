@@ -1,4 +1,4 @@
-import { FocusTrap, Paper } from "@mantine/core";
+import { Center, FocusTrap, Paper, Text } from "@mantine/core";
 import { useState } from "react";
 import { useMerlin } from "./hooks/merlin.ts";
 import MerlinLayout from "./components/MerlinLayout.tsx";
@@ -71,6 +71,11 @@ export default function App() {
           />
         </Paper>
       </FocusTrap>
+      <Center>
+        <Text fz="xs" m="sm" color="dimmed">
+          {session.data.id}@{APP_VERSION}
+        </Text>
+      </Center>
     </MerlinLayout>
   );
 }
