@@ -34,9 +34,9 @@ class MerlinApiController {
     @PostMapping(value = "/question", consumes = "text/plain")
     public ResponseEntity<String> level(HttpSession session, @RequestBody String prompt) {
         if (prompt.length() > 150) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Prompt too long");
-        logger.info("Prompt: {}", prompt);
         int currentLevel = merlinService.getCurrentLevel(session);
         String response = merlinService.respond(currentLevel, prompt);
+        logger.info("Level: {}, Prompt: {}, Response: {}", currentLevel, prompt, response);
         return ResponseEntity.ok(response);
     }
 
