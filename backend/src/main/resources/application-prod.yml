@@ -13,6 +13,3 @@ server:
     session:
       cookie:
         secure: true
-  error:
-    whitelabel:
-      enabled: false
