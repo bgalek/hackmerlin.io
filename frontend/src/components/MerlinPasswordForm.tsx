@@ -14,6 +14,10 @@ export function MerlinPasswordForm({
     initialValues: {
       password: "",
     },
+    validate: {
+      password: (value) =>
+        value.length < 2 ? "Password must have at least 2 letters" : null,
+    },
   });
   return (
     <form

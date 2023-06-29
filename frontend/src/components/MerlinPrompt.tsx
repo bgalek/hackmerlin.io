@@ -17,6 +17,10 @@ export default function MerlinPrompt({
     initialValues: {
       prompt: "",
     },
+    validate: {
+      prompt: (value) =>
+        value.length < 2 ? "Prompt must have at least 2 letters" : null,
+    },
   });
 
   const handleSubmit = form.onSubmit((values) =>

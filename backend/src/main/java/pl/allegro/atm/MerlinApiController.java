@@ -2,6 +2,7 @@ package pl.allegro.atm;
 
 
 import jakarta.servlet.http.HttpSession;
+import org.apache.logging.log4j.util.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -32,7 +33,8 @@ class MerlinApiController {
     }
 
     @PostMapping(value = "/question", consumes = "text/plain")
-    public ResponseEntity<String> level(HttpSession session, @RequestBody String prompt) {
+    public ResponseEntity<String> level(HttpSession session, @RequestBody(required = false) String prompt) {
+        if (Strings.isBlank(prompt)) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Prompt is required");
         if (prompt.length() > 150) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Prompt too long");
         int currentLevel = merlinService.getCurrentLevel(session);
         String response = merlinService.respond(currentLevel, prompt);
