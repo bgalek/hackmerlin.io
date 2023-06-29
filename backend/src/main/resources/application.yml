@@ -4,6 +4,11 @@ server:
   forward-headers-strategy: framework
   error:
     include-message: always
+  servlet:
+    session:
+      timeout: 30d
+      cookie:
+        max-age: 30d
 merlin:
   open-ai-api-key: key
 spring:

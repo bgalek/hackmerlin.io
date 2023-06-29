@@ -3,9 +3,16 @@ spring:
     store-type: jdbc
     jdbc:
       initialize-schema: ALWAYS
-      cleanup-cron: 0 0 1 * * *
   datasource:
     hikari:
       max-lifetime: 240000 # 4 minutes
   autoconfigure:
     exclude: [ ]
+server:
+  servlet:
+    session:
+      cookie:
+        secure: true
+  error:
+    whitelabel:
+      enabled: false

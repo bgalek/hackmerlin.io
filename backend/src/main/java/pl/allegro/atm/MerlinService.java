@@ -17,9 +17,7 @@ public class MerlinService {
 
     public String respond(int currentLevel, String prompt) {
         MerlinLevel level = merlinLevelRepository.getLevel(currentLevel);
-        if (level.inputFilter(prompt)) {
-            return level.inputFilterResponse();
-        }
+        if (level.inputFilter(prompt)) return level.inputFilterResponse();
         return openAiService.createChatCompletion(level.prompt(prompt))
                 .getChoices()
                 .stream()
@@ -27,7 +25,6 @@ public class MerlinService {
                 .findFirst()
                 .filter(output -> !level.outputFilter(output))
                 .orElse(level.outputFilterResponse());
-
     }
 
     public boolean checkSecret(HttpSession httpSession, String secret) {
