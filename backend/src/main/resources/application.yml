@@ -11,6 +11,57 @@ server:
         max-age: 30d
 merlin:
   open-ai-api-key: key
+  passwords:
+    - Scarlet
+    - Stellar
+    - Whiskers
+    - Lagoon
+    - Harmony
+    - Thunder
+    - Willow
+    - Blossom
+    - Saffron
+    - Velvet
+    - Serene
+    - Twilight
+    - Mosaic
+    - Breeze
+    - Pebbles
+    - Jade
+    - Radiant
+    - Glimmer
+    - Flamingo
+    - Nimbus
+    - Marigold
+    - Wander
+    - Aurora
+    - Luminary
+    - Misty
+    - Tropic
+    - Serendip
+    - Ember
+    - Enigma
+    - Zephyr
+    - Poppies
+    - Mirage
+    - Tundra
+    - Quasar
+    - Aquatic
+    - Zinnia
+    - Symphony
+    - Glitter
+    - Tranquilize
+    - Bliss
+    - Whisper
+    - Coral
+    - Opal
+    - Cascade
+    - Gossamer
+    - Azure
+    - Jubilee
+    - Reverie
+    - Solace
+    - Elysian
 spring:
   session:
     store-type: memory
