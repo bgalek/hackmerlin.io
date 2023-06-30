@@ -35,9 +35,7 @@ public class MerlinService {
 
     public void advanceLevel(HttpSession httpSession) {
         int currentLevel = getCurrentLevel(httpSession);
-        if (!merlinLevelRepository.isLastLevel(currentLevel)) {
-            httpSession.setAttribute("level", currentLevel + 1);
-        }
+        httpSession.setAttribute("level", currentLevel + 1);
     }
 
     public int getCurrentLevel(HttpSession session) {

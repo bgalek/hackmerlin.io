@@ -13,7 +13,7 @@ import ConfettiExplosion from "react-confetti-explosion";
 export default function App() {
   const session = useSession();
   if (session.isLoading || !session.data) return null;
-  if (session.data.currentLevel >= session.data.maxLevel)
+  if (session.data.currentLevel > session.data.maxLevel)
     return (
       <MerlinLayout>
         <ConfettiExplosion />
@@ -22,7 +22,9 @@ export default function App() {
           <Center>
             <Text>You have beaten Merlin!</Text>
           </Center>
-          <Text fz="sm">Special thanks to @kef and @zakret for help!</Text>
+          <Text fz="sm">
+            Special thanks to @kef, @zakret and @zwierzu for testing!
+          </Text>
         </Stack>
       </MerlinLayout>
     );
