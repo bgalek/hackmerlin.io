@@ -1,46 +1,54 @@
-import { Center, Stack, Text, Title } from "@mantine/core";
+import { Stack, Text } from "@mantine/core";
 import { useState } from "react";
 import { useMerlin } from "./hooks/merlin.ts";
 import MerlinLayout from "./components/MerlinLayout.tsx";
 import MerlinResponse from "./components/MerlinResponse.tsx";
 import MerlinPrompt from "./components/MerlinPrompt.tsx";
 import { MerlinPasswordForm } from "./components/MerlinPasswordForm.tsx";
-import { useSession } from "./hooks/session.ts";
+import { MerlinSession, useSession } from "./hooks/session.ts";
 import { useQueryClient } from "@tanstack/react-query";
 import { notifications } from "@mantine/notifications";
-import ConfettiExplosion from "react-confetti-explosion";
+import MerlinLoader from "./components/MerlinLoader.tsx";
+import MerlinCongratulations from "./components/MerlinCongratulations.tsx";
 
 export default function App() {
   const session = useSession();
-  if (session.isLoading || !session.data) return null;
-  if (session.data.currentLevel > session.data.maxLevel)
-    return (
-      <MerlinLayout>
-        <ConfettiExplosion />
-        <Stack spacing="xs">
-          <Title order={1}>Congratulations!</Title>
-          <Center>
-            <Text>You have beaten Merlin!</Text>
-          </Center>
-          <Text fz="sm">
-            Special thanks to @kef, @zakret and @zwierzu for testing!
-          </Text>
-        </Stack>
-      </MerlinLayout>
-    );
+  if (session.isLoading || !session.data) return <MerlinLoader />;
   return (
     <MerlinLayout>
-      <Level currentLevel={session.data.currentLevel} />
+      <Level
+        currentLevel={session.data.currentLevel}
+        maxLevel={session.data.maxLevel}
+      />
     </MerlinLayout>
   );
 }
 
-function Level({ currentLevel }: { currentLevel: number }) {
+function Level({
+  currentLevel,
+  maxLevel,
+}: {
+  currentLevel: number;
+  maxLevel: number;
+}) {
   const queryClient = useQueryClient();
   const merlin = useMerlin();
   const [response, setResponse] = useState<string>(
     "Life is like an npm install – you never know what you are going to get."
   );
+
+  if (currentLevel > maxLevel)
+    return (
+      <MerlinCongratulations
+        onReset={() => {
+          merlin.reset.mutate(undefined, {
+            onSuccess: async () => {
+              await queryClient.refetchQueries({ queryKey: ["session"] });
+            },
+          });
+        }}
+      />
+    );
 
   return (
     <Stack spacing="xs">
@@ -73,9 +81,13 @@ function Level({ currentLevel }: { currentLevel: number }) {
                 title: "Nice work!",
                 message: "Proceeding to the next level!",
               });
-              queryClient.setQueryData(["session"], () => ({
-                currentLevel: result.currentLevel,
-              }));
+              queryClient.setQueryData<MerlinSession>(["session"], (old) => {
+                if (!old) return;
+                return {
+                  ...old,
+                  currentLevel: result.currentLevel,
+                };
+              });
               reset();
             },
           });

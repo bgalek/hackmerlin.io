@@ -58,7 +58,7 @@ class MerlinApiController {
     }
 
     @PostMapping(value = "/reset")
-    public ResponseEntity<String> reset(HttpSession session) {
+    public ResponseEntity<Void> reset(HttpSession session) {
         session.invalidate();
         return ResponseEntity.accepted().build();
     }

@@ -14,7 +14,6 @@ export function useMerlin() {
           .headers({ "Content-Type": "text/plain" })
           .errorType("json")
           .post(prompt)
-          .fetchError((err) => console.log(err))
           .text(),
       onError: (error: WretchError) => {
         notifications.show({
@@ -36,6 +35,16 @@ export function useMerlin() {
           title: "Bad password",
           message: "This is not the secret phrase you are looking for.",
           color: "red",
+        });
+      },
+    }),
+    reset: useMutation({
+      mutationFn: () => api.url("/api/reset").post().res(),
+      onSuccess: () => {
+        notifications.show({
+          title: "Your progress was reset.",
+          message: "You'll now have to start over!",
+          color: "blue",
         });
       },
     }),
