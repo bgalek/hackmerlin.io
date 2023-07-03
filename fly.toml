@@ -10,3 +10,7 @@ primary_region = "ams"
   auto_stop_machines = true
   auto_start_machines = true
   min_machines_running = 0
+
+[metrics]
+  port = 8080
+  path = "/actuator/prometheus"

@@ -72,3 +72,8 @@ spring:
       - org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration
   main:
     lazy-initialization: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus
