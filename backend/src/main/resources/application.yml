@@ -1,6 +1,6 @@
 server:
   tomcat:
-    connection-timeout: 20s
+    connection-timeout: 25s
   forward-headers-strategy: framework
   error:
     include-message: always

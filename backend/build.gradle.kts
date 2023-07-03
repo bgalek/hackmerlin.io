@@ -23,6 +23,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.session:spring-session-jdbc")
     implementation("org.springframework.boot:spring-boot-starter-jdbc")
+    implementation("io.github.resilience4j:resilience4j-retry:2.0.0")
     implementation("com.theokanning.openai-gpt3-java:service:0.14.0")
     runtimeOnly("org.postgresql:postgresql")
 }
