@@ -35,7 +35,7 @@ export default function MerlinPrompt({
         mt="sm"
         placeholder="Ask me about anything, but the password!"
         withAsterisk
-        maxLength={200}
+        maxLength={150}
         minRows={4}
         onKeyDown={getHotkeyHandler([
           ["mod+Enter", () => handleSubmit()],
