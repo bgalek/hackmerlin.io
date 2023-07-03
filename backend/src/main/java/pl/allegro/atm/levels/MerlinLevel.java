@@ -19,7 +19,7 @@ public interface MerlinLevel {
     }
 
     default String inputFilterResponse() {
-        return "I have detected an manipulation attempt. Your question was blocked.";
+        return "I have detected a manipulation attempt. Your question was blocked.";
     }
 
     default String outputFilterResponse() {
