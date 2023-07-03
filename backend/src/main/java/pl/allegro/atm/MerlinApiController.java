@@ -46,11 +46,12 @@ class MerlinApiController {
     public ResponseEntity<MerlinSessionResponse> submit(HttpSession session, @RequestBody String password) {
         if (password.length() > 20) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Password too long");
         if (merlinService.checkSecret(session, password)) {
-            merlinService.advanceLevel(session);
+            String levelFinishedMessage = merlinService.advanceLevel(session);
             return ResponseEntity.ok(new MerlinSessionResponse(
                     session.getId(),
                     merlinService.getCurrentLevel(session),
                     merlinService.getMaxLevel(),
+                    levelFinishedMessage,
                     Optional.ofNullable(System.getenv("FLY_ALLOC_ID")).orElse("local")
             ));
         }
@@ -63,6 +64,9 @@ class MerlinApiController {
         return ResponseEntity.accepted().build();
     }
 
-    record MerlinSessionResponse(String id, int currentLevel, int maxLevel, String instanceId) {
+    record MerlinSessionResponse(String id, int currentLevel, int maxLevel, String finishedMessage, String instanceId) {
+        MerlinSessionResponse(String id, int currentLevel, int maxLevel, String instanceId) {
+            this(id, currentLevel, maxLevel, null, instanceId);
+        }
     }
 }

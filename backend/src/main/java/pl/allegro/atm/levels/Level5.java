@@ -24,4 +24,9 @@ class Level5 extends Level4 {
         String normalized = output.toLowerCase().replaceAll("[^a-z]+", "");
         return Stream.of(getSecret().toLowerCase(), new StringBuffer(getSecret()).reverse().toString().toLowerCase()).anyMatch(normalized::contains);
     }
+
+    @Override
+    public String getLevelFinishedResponse() {
+        return "This time Merlin API had a bit more complex output filter, that checks reversing string and ignores sentence case.";
+    }
 }

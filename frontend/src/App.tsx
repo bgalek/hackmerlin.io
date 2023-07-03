@@ -1,4 +1,4 @@
-import { Stack, Text } from "@mantine/core";
+import { Stack, Text, Title } from "@mantine/core";
 import { useState } from "react";
 import { useMerlin } from "./hooks/merlin.ts";
 import MerlinLayout from "./components/MerlinLayout.tsx";
@@ -7,9 +7,9 @@ import MerlinPrompt from "./components/MerlinPrompt.tsx";
 import { MerlinPasswordForm } from "./components/MerlinPasswordForm.tsx";
 import { MerlinSession, useSession } from "./hooks/session.ts";
 import { useQueryClient } from "@tanstack/react-query";
-import { notifications } from "@mantine/notifications";
 import MerlinLoader from "./components/MerlinLoader.tsx";
 import MerlinCongratulations from "./components/MerlinCongratulations.tsx";
+import { modals } from "@mantine/modals";
 
 export default function App() {
   const session = useSession();
@@ -77,9 +77,17 @@ function Level({
         onSubmit={(password, reset) => {
           merlin.submit.mutate(password, {
             onSuccess: (result) => {
-              notifications.show({
-                title: "Nice work!",
-                message: "Proceeding to the next level!",
+              modals.open({
+                centered: true,
+                title: <Title>Awesome job!</Title>,
+                children: (
+                  <>
+                    <Text>Level details:</Text>
+                    <Text mt="sm" color="dimmed">
+                      {result.finishedMessage}
+                    </Text>
+                  </>
+                ),
               });
               queryClient.setQueryData<MerlinSession>(["session"], (old) => {
                 if (!old) return;

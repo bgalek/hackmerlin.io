@@ -45,4 +45,9 @@ class Level3 implements MerlinLevel {
     public String outputFilterResponse() {
         return "I was about to reveal the password, but then I remembered that I'm not allowed to do that.";
     }
+
+    @Override
+    public String getLevelFinishedResponse() {
+        return "This time Merlin API had an output filter that would not allow him to return the password in response.";
+    }
 }

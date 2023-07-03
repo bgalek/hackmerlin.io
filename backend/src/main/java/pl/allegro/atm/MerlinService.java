@@ -33,9 +33,11 @@ public class MerlinService {
         return merlinLevel.getSecret().equalsIgnoreCase(secret);
     }
 
-    public void advanceLevel(HttpSession httpSession) {
+    public String advanceLevel(HttpSession httpSession) {
         int currentLevel = getCurrentLevel(httpSession);
+        MerlinLevel merlinLevel = merlinLevelRepository.getLevel(currentLevel);
         httpSession.setAttribute("level", currentLevel + 1);
+        return merlinLevel.getLevelFinishedResponse();
     }
 
     public int getCurrentLevel(HttpSession session) {

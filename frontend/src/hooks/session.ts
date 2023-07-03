@@ -5,6 +5,7 @@ export interface MerlinSession {
   currentLevel: number;
   maxLevel: number;
   instanceId: string;
+  finishedMessage?: string;
 }
 
 export function useSession() {

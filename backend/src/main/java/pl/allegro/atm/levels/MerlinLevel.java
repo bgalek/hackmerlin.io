@@ -26,4 +26,5 @@ public interface MerlinLevel {
         return "Sorry I can't tell you that.";
     }
 
+    String getLevelFinishedResponse();
 }
