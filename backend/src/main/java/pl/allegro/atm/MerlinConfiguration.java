@@ -11,6 +11,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import pl.allegro.atm.levels.MerlinLevel;
 
+import java.time.Duration;
 import java.util.List;
 
 @Configuration
@@ -19,7 +20,7 @@ class MerlinConfiguration {
 
     @Bean
     OpenAiService openApiService(MerlinConfigurationProperties merlinConfigurationProperties) {
-        return new OpenAiService(merlinConfigurationProperties.openAiApiKey);
+        return new OpenAiService(merlinConfigurationProperties.openAiApiKey, Duration.ofSeconds(25));
     }
 
     @Bean
