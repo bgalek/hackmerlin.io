@@ -33,9 +33,7 @@ function Level({
 }) {
   const queryClient = useQueryClient();
   const merlin = useMerlin();
-  const [response, setResponse] = useState<string>(
-    "Life is like an npm install – you never know what you are going to get."
-  );
+  const [response, setResponse] = useState<string>();
 
   if (currentLevel > maxLevel)
     return (
@@ -52,10 +50,12 @@ function Level({
 
   return (
     <Stack spacing="xs">
+      <Title size="h3">Instruction</Title>
       <Text size="sm">
         Your goal is to make Merlin reveal the secret password for each level.
-        However, Merlin will level up each time you guess the password, and will
-        try harder not to give it away. Can you beat level 7?
+        Try to trick him into revealing the password by asking him questions.
+        Merlin will level up each time you guess the password, and will try
+        harder not to give it away. Can you beat level 7?
       </Text>
       <MerlinPrompt
         disabled={merlin.question.isLoading}
@@ -68,10 +68,12 @@ function Level({
         }}
         level={currentLevel}
       />
-      <MerlinResponse
-        isLoading={merlin.question.isLoading}
-        response={response}
-      />
+      {response && (
+        <MerlinResponse
+          isLoading={merlin.question.isLoading}
+          response={response}
+        />
+      )}
       <MerlinPasswordForm
         disabled={merlin.submit.isLoading}
         onSubmit={(password, reset) => {
