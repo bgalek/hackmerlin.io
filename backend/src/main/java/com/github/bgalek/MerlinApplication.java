@@ -1,4 +1,4 @@
-package pl.allegro.atm;
+package com.github.bgalek;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

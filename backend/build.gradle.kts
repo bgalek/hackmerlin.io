@@ -5,7 +5,7 @@ plugins {
     id("io.spring.dependency-management") version "1.1.0"
 }
 
-group = "pl.allegro.atm"
+group = "com.github.bgalek"
 version = "1.0.0"
 
 java {

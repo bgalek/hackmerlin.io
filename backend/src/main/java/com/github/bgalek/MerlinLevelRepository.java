@@ -1,6 +1,6 @@
-package pl.allegro.atm;
+package com.github.bgalek;
 
-import pl.allegro.atm.levels.MerlinLevel;
+import com.github.bgalek.levels.MerlinLevel;
 
 import java.util.List;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package pl.allegro.atm.levels;
+package com.github.bgalek.levels;
 
 import com.theokanning.openai.completion.chat.ChatCompletionRequest;
 

@@ -1,4 +1,4 @@
-package pl.allegro.atm;
+package com.github.bgalek;
 
 
 import jakarta.servlet.http.HttpSession;

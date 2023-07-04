@@ -1,8 +1,8 @@
-package pl.allegro.atm;
+package com.github.bgalek;
 
+import com.github.bgalek.levels.MerlinLevel;
 import com.theokanning.openai.service.OpenAiService;
 import jakarta.servlet.http.HttpSession;
-import pl.allegro.atm.levels.MerlinLevel;
 
 import java.util.Optional;
 
