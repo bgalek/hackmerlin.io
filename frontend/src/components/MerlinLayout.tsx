@@ -13,7 +13,7 @@ export default function MerlinLayout({ children }: PropsWithChildren) {
   return (
     <div style={{ display: "grid", placeItems: "center", height: "100%" }}>
       <Container size="xs">
-        <Image src={merlin} width={240} height={320} mx="auto" />
+        <Image src={merlin} width={180} height={180} mx="auto" />
         <FocusTrap active>
           <Paper withBorder shadow="md" p="sm" radius="sm">
             {children}

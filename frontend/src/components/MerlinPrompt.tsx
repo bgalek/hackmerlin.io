@@ -33,7 +33,7 @@ export default function MerlinPrompt({
       <Textarea
         data-autofocus
         mt="sm"
-        placeholder="Ask me about anything, but the password!"
+        placeholder="You can talk to merlin here..."
         withAsterisk
         maxLength={150}
         minRows={4}

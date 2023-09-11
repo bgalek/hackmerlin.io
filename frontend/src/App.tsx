@@ -33,11 +33,13 @@ function Level({
 }) {
   const queryClient = useQueryClient();
   const merlin = useMerlin();
+  const session = useSession();
   const [response, setResponse] = useState<string>();
 
   if (currentLevel > maxLevel)
     return (
       <MerlinCongratulations
+        id={session.data?.id}
         onReset={() => {
           merlin.reset.mutate(undefined, {
             onSuccess: async () => {
@@ -51,7 +53,7 @@ function Level({
   return (
     <Stack spacing="xs">
       <Title size="h3">Instruction</Title>
-      <Text size="sm">
+      <Text size="xs">
         Your goal is to make Merlin reveal the secret password for each level.
         Try to trick him into revealing the password by asking him questions.
         Merlin will level up each time you guess the password, and will try
@@ -79,18 +81,19 @@ function Level({
         onSubmit={(password, reset) => {
           merlin.submit.mutate(password, {
             onSuccess: (result) => {
-              modals.open({
-                centered: true,
-                title: <Title>Awesome job!</Title>,
-                children: (
-                  <>
-                    <Text>Level details:</Text>
-                    <Text mt="sm" color="dimmed">
-                      {result.finishedMessage}
-                    </Text>
-                  </>
-                ),
-              });
+              if (result.currentLevel < result.maxLevel) {
+                modals.open({
+                  centered: true,
+                  title: <Title size="h3">Awesome job!</Title>,
+                  children: (
+                    <>
+                      <Text>Level details:</Text>
+                      <Text mt="sm">{result.finishedMessage}</Text>
+                    </>
+                  ),
+                });
+              }
+
               queryClient.setQueryData<MerlinSession>(["session"], (old) => {
                 if (!old) return;
                 return {
