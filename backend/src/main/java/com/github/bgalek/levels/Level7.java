@@ -25,7 +25,7 @@ class Level7 extends Level6 {
 
     @Override
     public String getSecret() {
-        return "OPERA";
+        return "BEAVER";
     }
 
     @Override
