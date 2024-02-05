@@ -1,4 +1,6 @@
 spring:
+  main:
+    lazy-initialization: true
   session:
     store-type: jdbc
     jdbc:

@@ -10,7 +10,7 @@
     "check": "npm run lint && npm run test",
     "clean": "rm -Rf build/dist",
     "test": "echo Testing frontend",
-    "prepare": "cd .. && husky install"
+    "prepare": "cd .. && husky"
   },
   "dependencies": {
     "@emotion/react": "^11.11.3",
