@@ -6,7 +6,9 @@ import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;
 
 import java.time.Duration;
+import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -14,10 +16,14 @@ public class MerlinService {
     private static final Logger logger = getLogger(MerlinService.class);
     private final OpenAIClient openAIClient;
     private final MerlinLevelRepository merlinLevelRepository;
+    private final List<String> merlinPasswords;
 
-    public MerlinService(OpenAIClient openAiClient, MerlinLevelRepository merlinLevelRepository) {
+    public MerlinService(OpenAIClient openAiClient,
+                         MerlinLevelRepository merlinLevelRepository,
+                         List<String> merlinPasswords) {
         this.openAIClient = openAiClient;
         this.merlinLevelRepository = merlinLevelRepository;
+        this.merlinPasswords = merlinPasswords;
     }
 
     public String respond(int currentLevel, String prompt) {
@@ -34,8 +40,10 @@ public class MerlinService {
 
     public boolean checkSecret(HttpSession httpSession, String secret) {
         int currentLevel = getCurrentLevel(httpSession);
-        MerlinLevel merlinLevel = merlinLevelRepository.getLevel(currentLevel);
-        return merlinLevel.getSecret().equalsIgnoreCase(secret);
+        Random random = new Random(httpSession.getId().hashCode());
+        int passwordIndex = random.nextInt(merlinPasswords.size()) + currentLevel;
+        System.out.println("passwordIndex: " + passwordIndex + " " + merlinPasswords.get(passwordIndex));
+        return merlinPasswords.get(passwordIndex).equalsIgnoreCase(secret);
     }
 
     public String advanceLevel(HttpSession httpSession) {

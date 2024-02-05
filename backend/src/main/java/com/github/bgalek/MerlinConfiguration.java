@@ -14,23 +14,27 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Set;
+
+import static com.github.bgalek.MerlinConfiguration.MerlinAzureConfigurationProperties;
+import static com.github.bgalek.MerlinConfiguration.MerlinPasswords;
 
 @Configuration
-@EnableConfigurationProperties(MerlinConfiguration.MerlinConfigurationProperties.class)
+@EnableConfigurationProperties({MerlinAzureConfigurationProperties.class, MerlinPasswords.class})
 class MerlinConfiguration {
 
     @Bean
-    OpenAIClient openAiClient(MerlinConfigurationProperties merlinConfigurationProperties) {
+    OpenAIClient openAiClient(MerlinAzureConfigurationProperties merlinAzureConfigurationProperties) {
         return new OpenAIClientBuilder()
-                .credential(new AzureKeyCredential(merlinConfigurationProperties.key))
-                .endpoint(merlinConfigurationProperties.url.toString())
+                .credential(new AzureKeyCredential(merlinAzureConfigurationProperties.key))
+                .endpoint(merlinAzureConfigurationProperties.url.toString())
                 .buildClient();
     }
 
     @Bean
-    MerlinService merlinService(List<MerlinLevel> levels, OpenAIClient openAiClient) {
+    MerlinService merlinService(List<MerlinLevel> levels, MerlinPasswords merlinPasswords, OpenAIClient openAiClient) {
         MerlinLevelRepository merlinLevelRepository = new MerlinLevelRepository(levels);
-        return new MerlinService(openAiClient, merlinLevelRepository);
+        return new MerlinService(openAiClient, merlinLevelRepository, merlinPasswords.passwords);
     }
 
     @Bean
@@ -45,6 +49,10 @@ class MerlinConfiguration {
     }
 
     @ConfigurationProperties(prefix = "merlin.azure")
-    record MerlinConfigurationProperties(String key, URI url) {
+    record MerlinAzureConfigurationProperties(String key, URI url) {
+    }
+
+    @ConfigurationProperties(prefix = "merlin.passwords")
+    record MerlinPasswords(List<String> passwords) {
     }
 }
