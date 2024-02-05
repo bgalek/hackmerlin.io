@@ -24,7 +24,7 @@ dependencies {
     implementation("org.springframework.session:spring-session-jdbc")
     implementation("org.springframework.boot:spring-boot-starter-jdbc")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
-    implementation("io.github.resilience4j:resilience4j-retry:2.0.0")
+    implementation("io.github.resilience4j:resilience4j-retry:2.2.0")
     implementation("com.theokanning.openai-gpt3-java:service:0.18.2")
     runtimeOnly("io.micrometer:micrometer-registry-prometheus:1.11.1")
     runtimeOnly("org.postgresql:postgresql")
