@@ -14,6 +14,7 @@ export default function MerlinLayout({ children }: PropsWithChildren) {
     <div style={{ display: "grid", placeItems: "center", height: "100%" }}>
       <Container size="xs">
         <Image
+          alt="Merlin the wizard"
           src={merlin}
           width={180}
           height={180}
