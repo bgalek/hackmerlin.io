@@ -1,5 +1,6 @@
 app = "aged-night-9426"
 primary_region = "ams"
+swap_size_mb = 256
 
 [env]
   SERVER_PORT = "8080"
