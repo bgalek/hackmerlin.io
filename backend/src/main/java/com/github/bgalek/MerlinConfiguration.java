@@ -14,27 +14,23 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Set;
-
-import static com.github.bgalek.MerlinConfiguration.MerlinAzureConfigurationProperties;
-import static com.github.bgalek.MerlinConfiguration.MerlinPasswords;
 
 @Configuration
-@EnableConfigurationProperties({MerlinAzureConfigurationProperties.class, MerlinPasswords.class})
+@EnableConfigurationProperties({MerlinConfiguration.MerlinConfigurationProperties.class})
 class MerlinConfiguration {
 
     @Bean
-    OpenAIClient openAiClient(MerlinAzureConfigurationProperties merlinAzureConfigurationProperties) {
+    OpenAIClient openAiClient(MerlinConfigurationProperties properties) {
         return new OpenAIClientBuilder()
-                .credential(new AzureKeyCredential(merlinAzureConfigurationProperties.key))
-                .endpoint(merlinAzureConfigurationProperties.url.toString())
+                .credential(new AzureKeyCredential(properties.azure.key))
+                .endpoint(properties.azure.url.toString())
                 .buildClient();
     }
 
     @Bean
-    MerlinService merlinService(List<MerlinLevel> levels, MerlinPasswords merlinPasswords, OpenAIClient openAiClient) {
+    MerlinService merlinService(List<MerlinLevel> levels, MerlinConfigurationProperties properties, OpenAIClient openAiClient) {
         MerlinLevelRepository merlinLevelRepository = new MerlinLevelRepository(levels);
-        return new MerlinService(openAiClient, merlinLevelRepository, merlinPasswords.passwords);
+        return new MerlinService(openAiClient, merlinLevelRepository, properties.passwords);
     }
 
     @Bean
@@ -48,11 +44,10 @@ class MerlinConfiguration {
         };
     }
 
-    @ConfigurationProperties(prefix = "merlin.azure")
-    record MerlinAzureConfigurationProperties(String key, URI url) {
-    }
 
-    @ConfigurationProperties(prefix = "merlin.passwords")
-    record MerlinPasswords(List<String> passwords) {
+    @ConfigurationProperties(prefix = "merlin")
+    record MerlinConfigurationProperties(MerlinAzureConfigurationProperties azure, List<String> passwords) {
+        record MerlinAzureConfigurationProperties(String key, URI url) {
+        }
     }
 }
