@@ -24,7 +24,7 @@ export default function MerlinPrompt({
   });
 
   const handleSubmit = form.onSubmit((values) =>
-    onSubmit(values.prompt, form.reset)
+    onSubmit(values.prompt, form.reset),
   );
 
   return (

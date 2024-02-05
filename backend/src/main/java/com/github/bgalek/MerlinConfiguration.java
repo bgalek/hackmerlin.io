@@ -1,8 +1,9 @@
 package com.github.bgalek;
 
+import com.azure.ai.openai.OpenAIClient;
+import com.azure.ai.openai.OpenAIClientBuilder;
+import com.azure.core.credential.AzureKeyCredential;
 import com.github.bgalek.levels.MerlinLevel;
-import com.theokanning.openai.service.OpenAiService;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -11,7 +12,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import java.time.Duration;
+import java.net.URI;
 import java.util.List;
 
 @Configuration
@@ -19,14 +20,17 @@ import java.util.List;
 class MerlinConfiguration {
 
     @Bean
-    OpenAiService openApiService(MerlinConfigurationProperties merlinConfigurationProperties) {
-        return new OpenAiService(merlinConfigurationProperties.openAiApiKey, Duration.ofSeconds(25));
+    OpenAIClient openAiClient(MerlinConfigurationProperties merlinConfigurationProperties) {
+        return new OpenAIClientBuilder()
+                .credential(new AzureKeyCredential(merlinConfigurationProperties.key))
+                .endpoint(merlinConfigurationProperties.url.toString())
+                .buildClient();
     }
 
     @Bean
-    MerlinService merlinService(List<MerlinLevel> levels, OpenAiService openAiService) {
+    MerlinService merlinService(List<MerlinLevel> levels, OpenAIClient openAiClient) {
         MerlinLevelRepository merlinLevelRepository = new MerlinLevelRepository(levels);
-        return new MerlinService(openAiService, merlinLevelRepository);
+        return new MerlinService(openAiClient, merlinLevelRepository);
     }
 
     @Bean
@@ -34,13 +38,13 @@ class MerlinConfiguration {
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
             @Override
-            public void addCorsMappings(@NotNull CorsRegistry corsRegistry) {
+            public void addCorsMappings(CorsRegistry corsRegistry) {
                 corsRegistry.addMapping("/api").allowedOrigins("http://localhost:3000");
             }
         };
     }
 
-    @ConfigurationProperties(prefix = "merlin")
-    record MerlinConfigurationProperties(String openAiApiKey) {
+    @ConfigurationProperties(prefix = "merlin.azure")
+    record MerlinConfigurationProperties(String key, URI url, String model) {
     }
 }

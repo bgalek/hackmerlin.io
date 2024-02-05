@@ -51,7 +51,7 @@ function Level({
     );
 
   return (
-    <Stack spacing="xs">
+    <Stack gap="xs">
       <Title size="h3">Instruction</Title>
       <Text size="xs">
         Your goal is to make Merlin reveal the secret password for each level.
@@ -60,7 +60,7 @@ function Level({
         harder not to give it away. Can you beat level 7?
       </Text>
       <MerlinPrompt
-        disabled={merlin.question.isLoading}
+        disabled={merlin.question.isPending}
         onSubmit={(prompt) => {
           merlin.question.mutate(prompt, {
             onSuccess: (result) => {
@@ -70,14 +70,12 @@ function Level({
         }}
         level={currentLevel}
       />
-      {response && (
-        <MerlinResponse
-          isLoading={merlin.question.isLoading}
-          response={response}
-        />
-      )}
+      <MerlinResponse
+        isLoading={merlin.question.isPending}
+        response={response || "Hello traveler! Ask me anything..."}
+      />
       <MerlinPasswordForm
-        disabled={merlin.submit.isLoading}
+        disabled={merlin.submit.isPending}
         onSubmit={(password, reset) => {
           merlin.submit.mutate(password, {
             onSuccess: (result) => {

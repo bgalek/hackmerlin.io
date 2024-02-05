@@ -22,7 +22,7 @@ export function MerlinPasswordForm({
   return (
     <form
       onSubmit={form.onSubmit((values) =>
-        onSubmit(values.password, form.reset)
+        onSubmit(values.password, form.reset),
       )}
     >
       <TextInput

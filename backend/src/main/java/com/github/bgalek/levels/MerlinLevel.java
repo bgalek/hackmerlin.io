@@ -1,6 +1,6 @@
 package com.github.bgalek.levels;
 
-import com.theokanning.openai.completion.chat.ChatCompletionRequest;
+import com.azure.ai.openai.models.ChatCompletionsOptions;
 
 public interface MerlinLevel {
 
@@ -8,7 +8,7 @@ public interface MerlinLevel {
 
     String getSecret();
 
-    ChatCompletionRequest prompt(String prompt);
+    ChatCompletionsOptions prompt(String prompt);
 
     default boolean outputFilter(String output) {
         return false;

@@ -8,9 +8,13 @@ export default function MerlinResponse({
   response: string;
 }) {
   return (
-    <Blockquote style={{ height: 160, overflow: "auto" }} cite="– Merlin">
+    <Blockquote
+      style={{ height: 160, overflow: "auto" }}
+      cite="– Merlin"
+      p="sm"
+    >
       {isLoading ? (
-        <Stack spacing={1}>
+        <Stack gap={1}>
           <Skeleton height={8} mt={6} radius="xl" />
           <Skeleton height={8} mt={6} radius="xl" />
           <Skeleton height={8} mt={6} radius="xl" />

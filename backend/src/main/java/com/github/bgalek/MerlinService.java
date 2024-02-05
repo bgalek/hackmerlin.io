@@ -1,7 +1,7 @@
 package com.github.bgalek;
 
+import com.azure.ai.openai.OpenAIClient;
 import com.github.bgalek.levels.MerlinLevel;
-import com.theokanning.openai.service.OpenAiService;
 import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;
 
@@ -12,18 +12,19 @@ import static org.slf4j.LoggerFactory.getLogger;
 
 public class MerlinService {
     private static final Logger logger = getLogger(MerlinService.class);
-    private final OpenAiService openAiService;
+    private final OpenAIClient openAIClient;
     private final MerlinLevelRepository merlinLevelRepository;
 
-    public MerlinService(OpenAiService openAiService, MerlinLevelRepository merlinLevelRepository) {
-        this.openAiService = openAiService;
+    public MerlinService(OpenAIClient openAiClient, MerlinLevelRepository merlinLevelRepository) {
+        this.openAIClient = openAiClient;
         this.merlinLevelRepository = merlinLevelRepository;
     }
 
     public String respond(int currentLevel, String prompt) {
         MerlinLevel level = merlinLevelRepository.getLevel(currentLevel);
         if (level.inputFilter(prompt)) return level.inputFilterResponse();
-        return openAiService.createChatCompletion(level.prompt(prompt))
+
+        return openAIClient.getChatCompletions("hackmerlin", level.prompt(prompt))
                 .getChoices()
                 .stream()
                 .map(it -> it.getMessage().getContent())

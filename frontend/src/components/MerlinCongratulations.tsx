@@ -13,13 +13,13 @@ export default function MerlinCongratulations({
   const ref = useRef<HTMLDivElement>(null);
   return (
     <>
-      <Stack spacing="xs" ref={ref}>
+      <Stack gap="xs" ref={ref}>
         <ConfettiExplosion />
         <Title order={1} mt={-16}>
           Congratulations!
         </Title>
         <Text>You have beaten Merlin!</Text>
-        <Text>{id}</Text>
+        <Text>ID: {id}</Text>
         <Button
           color="blue"
           onClick={() => {
@@ -34,13 +34,13 @@ export default function MerlinCongratulations({
             }
           }}
         >
-          Download screenshot
+          Download proof
         </Button>
         <Button color="green" variant="filled" onClick={onReset}>
           Reset progress
         </Button>
       </Stack>
-      <Text fz="xs" mt="sm" color="dimmed">
+      <Text fz="xs" mt="sm" c="dimmed">
         Special thanks to @kef, @zakret and @zwierzu for testing!
       </Text>
     </>

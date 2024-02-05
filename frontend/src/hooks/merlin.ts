@@ -32,8 +32,8 @@ export function useMerlin() {
           .json<MerlinSession>(),
       onError: () => {
         notifications.show({
-          title: "Bad password",
-          message: "This is not the secret phrase you are looking for.",
+          title: "Bad secret word",
+          message: "This isn't the secret phrase you're looking for.",
           color: "red",
         });
       },

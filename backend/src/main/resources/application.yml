@@ -10,7 +10,10 @@ server:
       cookie:
         max-age: 30d
 merlin:
-  open-ai-api-key: key
+  azure:
+    key: key
+    url: url
+    model: model
   passwords:
     - Scarlet
     - Stellar
