@@ -72,6 +72,9 @@ spring:
       - org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration
   main:
     lazy-initialization: true
+  threads:
+    virtual:
+      enabled: true
 management:
   endpoints:
     web:

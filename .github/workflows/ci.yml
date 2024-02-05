@@ -12,11 +12,12 @@ jobs:
     env:
       FLY_API_TOKEN: ${{ secrets.FLY_TOKEN }}
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-java@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: 20
+          java-version: 21
+      - uses: gradle/actions/setup-gradle@v3
       - name: Test with Gradle
         run: ./gradlew build
       - uses: superfly/flyctl-actions/setup-flyctl@master
