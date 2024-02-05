@@ -45,7 +45,6 @@ public class MerlinService {
             random.nextInt(merlinPasswords.size());
         }
         int passwordIndex = random.nextInt(merlinPasswords.size());
-        System.out.println("current level: " + currentLevel + ", passwordIndex: " + passwordIndex + " " + merlinPasswords.get(passwordIndex));
         return merlinPasswords.get(passwordIndex).equalsIgnoreCase(secret);
     }
 
