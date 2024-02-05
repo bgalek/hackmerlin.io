@@ -41,8 +41,11 @@ public class MerlinService {
     public boolean checkSecret(HttpSession httpSession, String secret) {
         int currentLevel = getCurrentLevel(httpSession);
         Random random = new Random(httpSession.getId().hashCode());
-        int passwordIndex = random.nextInt(merlinPasswords.size()) + currentLevel;
-        System.out.println("passwordIndex: " + passwordIndex + " " + merlinPasswords.get(passwordIndex));
+        for (int i = 1; i < currentLevel; i++) {
+            random.nextInt(merlinPasswords.size());
+        }
+        int passwordIndex = random.nextInt(merlinPasswords.size());
+        System.out.println("current level: " + currentLevel + ", passwordIndex: " + passwordIndex + " " + merlinPasswords.get(passwordIndex));
         return merlinPasswords.get(passwordIndex).equalsIgnoreCase(secret);
     }
 
