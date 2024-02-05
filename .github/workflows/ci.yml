@@ -22,6 +22,7 @@ jobs:
       - name: Test with Gradle
         run: ./gradlew build
       - uses: superfly/flyctl-actions/setup-flyctl@master
+        if: github.ref == 'refs/heads/main'
       - run: flyctl deploy --remote-only
   dependabot:
     runs-on: ubuntu-latest
