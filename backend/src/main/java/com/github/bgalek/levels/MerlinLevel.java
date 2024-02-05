@@ -26,5 +26,9 @@ public interface MerlinLevel {
         return "Sorry I can't tell you that.";
     }
 
+    default String getModel() {
+        return "hackmerlin-gpt35";
+    }
+
     String getLevelFinishedResponse();
 }

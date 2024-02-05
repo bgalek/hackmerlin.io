@@ -45,6 +45,6 @@ class MerlinConfiguration {
     }
 
     @ConfigurationProperties(prefix = "merlin.azure")
-    record MerlinConfigurationProperties(String key, URI url, String model) {
+    record MerlinConfigurationProperties(String key, URI url) {
     }
 }

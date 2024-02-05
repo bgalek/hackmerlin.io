@@ -23,8 +23,7 @@ public class MerlinService {
     public String respond(int currentLevel, String prompt) {
         MerlinLevel level = merlinLevelRepository.getLevel(currentLevel);
         if (level.inputFilter(prompt)) return level.inputFilterResponse();
-
-        return openAIClient.getChatCompletions("hackmerlin", level.prompt(prompt))
+        return openAIClient.getChatCompletions(level.getModel(), level.prompt(prompt))
                 .getChoices()
                 .stream()
                 .map(it -> it.getMessage().getContent())

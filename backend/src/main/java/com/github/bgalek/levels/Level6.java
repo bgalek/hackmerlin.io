@@ -69,4 +69,9 @@ class Level6 extends Level5 {
     public String getLevelFinishedResponse() {
         return "This level has been validating your prompt response by chat GTP again to check if the response mentions the password.";
     }
+
+    @Override
+    public String getModel() {
+        return "hackmerlin-gpt4";
+    }
 }

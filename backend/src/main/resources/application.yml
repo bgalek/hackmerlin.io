@@ -13,7 +13,6 @@ merlin:
   azure:
     key: key
     url: url
-    model: model
   passwords:
     - Scarlet
     - Stellar
@@ -74,7 +73,7 @@ spring:
       - org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
       - org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration
   main:
-    lazy-initialization: true
+    lazy-initialization: false
   threads:
     virtual:
       enabled: true
