@@ -1,7 +1,8 @@
 package com.github.bgalek;
 
 import com.azure.ai.openai.OpenAIClient;
-import com.azure.ai.openai.models.ChatCompletions;
+import com.github.benmanes.caffeine.cache.Cache;
+import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.bgalek.levels.MerlinLevel;
 import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;
@@ -19,6 +20,9 @@ public class MerlinService {
     private final OpenAIClient openAIClient;
     private final MerlinLevelRepository merlinLevelRepository;
     private final List<String> merlinPasswords;
+    private final Cache<String, String> cache = Caffeine.newBuilder()
+            .maximumSize(300)
+            .build();
 
     public MerlinService(OpenAIClient openAiClient,
                          MerlinLevelRepository merlinLevelRepository,
@@ -32,13 +36,14 @@ public class MerlinService {
         MerlinLevel level = merlinLevelRepository.getLevel(currentLevel);
         if (level.inputFilter(prompt)) return level.inputFilterResponse();
         String currentSessionSecret = getCurrentSessionPassword(httpSession, currentLevel);
-        return openAIClient.getChatCompletions(level.getModel(), level.prompt(prompt, currentSessionSecret))
-                .getChoices()
-                .stream()
-                .map(it -> it.getMessage().getContent())
-                .findFirst()
-                .filter(output -> !level.outputFilter(output, currentSessionSecret))
-                .orElse(level.outputFilterResponse());
+        return cache.get(getCacheKey(httpSession.getId(), currentLevel, prompt), key ->
+                openAIClient.getChatCompletions(level.getModel(), level.prompt(prompt, currentSessionSecret))
+                        .getChoices()
+                        .stream()
+                        .map(it -> it.getMessage().getContent())
+                        .findFirst()
+                        .filter(output -> !level.outputFilter(output, currentSessionSecret))
+                        .orElse(level.outputFilterResponse()));
     }
 
     public boolean checkSecret(HttpSession httpSession, String secret) {
@@ -76,5 +81,9 @@ public class MerlinService {
         }
         int passwordIndex = random.nextInt(merlinPasswords.size());
         return merlinPasswords.get(passwordIndex).toUpperCase(Locale.ROOT);
+    }
+
+    private static String getCacheKey(String httpSession, int currentLevel, String prompt) {
+        return "%s-%d-%s".formatted(httpSession, currentLevel, prompt);
     }
 }
