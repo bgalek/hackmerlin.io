@@ -9,7 +9,7 @@ export default function MerlinResponse({
 }) {
   return (
     <Blockquote
-      style={{ height: 160, overflow: "auto" }}
+      style={{ height: 130, overflow: "auto" }}
       cite="– Merlin"
       p="sm"
     >

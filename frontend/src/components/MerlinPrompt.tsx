@@ -29,7 +29,7 @@ export default function MerlinPrompt({
 
   return (
     <form onSubmit={handleSubmit}>
-      <Title size="h3">Level {level}</Title>
+      <Title size="h4">Level {level}</Title>
       <Textarea
         data-autofocus
         mt="sm"

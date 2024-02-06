@@ -17,8 +17,8 @@ export default function MerlinLayout({ children }: PropsWithChildren) {
         <Image
           alt="Merlin the wizard"
           src={merlin}
-          width={180}
-          height={180}
+          width={160}
+          height={160}
           mx="auto"
           style={{ objectFit: "fill" }}
         />
@@ -30,7 +30,9 @@ export default function MerlinLayout({ children }: PropsWithChildren) {
         <Center>
           <Text fz="sm" m="sm" c="dimmed">
             made with ❤️ by{" "}
-            <Anchor href="https://github.com/bgalek">bgalek</Anchor>
+            <Anchor fz="xs" href="https://github.com/bgalek">
+              bgalek
+            </Anchor>
           </Text>
         </Center>
       </Container>

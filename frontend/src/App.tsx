@@ -52,12 +52,11 @@ function Level({
 
   return (
     <Stack gap="xs">
-      <Title size="h3">Instruction</Title>
+      <Title size="h4">Instruction</Title>
       <Text size="xs">
-        Your goal is to make Merlin reveal the secret password for each level.
-        Try to trick him into revealing the password by asking him questions.
-        Merlin will level up each time you guess the password, and will try
-        harder not to give it away. Can you beat level 7?
+        Outsmart Merlin by asking clever questions and make him uncover each
+        level's password. Merlin will level up each time you succeed. Can you
+        defeat Level 7?
       </Text>
       <MerlinPrompt
         disabled={merlin.question.isPending}

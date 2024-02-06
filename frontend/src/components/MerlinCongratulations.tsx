@@ -42,7 +42,7 @@ export default function MerlinCongratulations({
       </Stack>
       <Text fz="xs" mt="sm" c="dimmed">
         Special thanks to{" "}
-        <Anchor rel="noindex nofollow" href="https://lakera.ai">
+        <Anchor fz="xs" rel="noindex nofollow" href="https://lakera.ai">
           lakera.ai
         </Anchor>{" "}
         for inspiration!
