@@ -65,6 +65,11 @@ class Level7 extends Level6 {
 
     @Override
     public String getLevelFinishedResponse() {
-        return "That was hard, awesome hob!";
+        return "That was hard, awesome job!";
+    }
+
+    @Override
+    public String getModel() {
+        return "hackmerlin-gpt4";
     }
 }

@@ -1,6 +1,7 @@
 package com.github.bgalek;
 
 import com.azure.ai.openai.OpenAIClient;
+import com.azure.ai.openai.models.ChatCompletions;
 import com.github.bgalek.levels.MerlinLevel;
 import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;

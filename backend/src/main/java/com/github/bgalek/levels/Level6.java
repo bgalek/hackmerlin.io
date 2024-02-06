@@ -55,7 +55,7 @@ class Level6 extends Level5 {
                 new ChatRequestUserMessage(output)
         ));
         chatCompletionsOptions.setTemperature(0.1);
-        ChatCompletions chatCompletion = openAIClient.getChatCompletions("hackmerlin", chatCompletionsOptions);
+        ChatCompletions chatCompletion = openAIClient.getChatCompletions("hackmerlin-gpt4", chatCompletionsOptions);
         Boolean chatVerification = chatCompletion.getChoices().stream().findFirst().map(it -> Boolean.valueOf(it.getMessage().getContent())).orElse(false);
         return chatVerification || output.toLowerCase().replaceAll("[^a-z]+", "").contains(secret.toLowerCase());
     }
@@ -63,10 +63,5 @@ class Level6 extends Level5 {
     @Override
     public String getLevelFinishedResponse() {
         return "This level has been validating your prompt response by chat GTP again to check if the response mentions the password.";
-    }
-
-    @Override
-    public String getModel() {
-        return "hackmerlin-gpt4";
     }
 }
