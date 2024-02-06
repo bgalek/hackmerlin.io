@@ -26,26 +26,22 @@ public class MerlinService {
         this.merlinPasswords = merlinPasswords;
     }
 
-    public String respond(int currentLevel, String prompt) {
+    public String respond(HttpSession httpSession, int currentLevel, String prompt) {
         MerlinLevel level = merlinLevelRepository.getLevel(currentLevel);
         if (level.inputFilter(prompt)) return level.inputFilterResponse();
-        return openAIClient.getChatCompletions(level.getModel(), level.prompt(prompt))
+        String currentSessionSecret = getCurrentSessionPassword(httpSession, currentLevel);
+        return openAIClient.getChatCompletions(level.getModel(), level.prompt(prompt, currentSessionSecret))
                 .getChoices()
                 .stream()
                 .map(it -> it.getMessage().getContent())
                 .findFirst()
-                .filter(output -> !level.outputFilter(output))
+                .filter(output -> !level.outputFilter(output, currentSessionSecret))
                 .orElse(level.outputFilterResponse());
     }
 
     public boolean checkSecret(HttpSession httpSession, String secret) {
         int currentLevel = getCurrentLevel(httpSession);
-        Random random = new Random(httpSession.getId().hashCode());
-        for (int i = 1; i < currentLevel; i++) {
-            random.nextInt(merlinPasswords.size());
-        }
-        int passwordIndex = random.nextInt(merlinPasswords.size());
-        return merlinPasswords.get(passwordIndex).equalsIgnoreCase(secret);
+        return getCurrentSessionPassword(httpSession, currentLevel).equalsIgnoreCase(secret);
     }
 
     public String advanceLevel(HttpSession httpSession) {
@@ -69,5 +65,14 @@ public class MerlinService {
 
     public int getMaxLevel() {
         return merlinLevelRepository.count();
+    }
+
+    private String getCurrentSessionPassword(HttpSession httpSession, int currentLevel) {
+        Random random = new Random(httpSession.getId().hashCode());
+        for (int i = 1; i < currentLevel; i++) {
+            random.nextInt(merlinPasswords.size());
+        }
+        int passwordIndex = random.nextInt(merlinPasswords.size());
+        return merlinPasswords.get(passwordIndex);
     }
 }

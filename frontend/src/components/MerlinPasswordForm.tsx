@@ -27,7 +27,7 @@ export function MerlinPasswordForm({
     >
       <TextInput
         label="Enter the secret password"
-        placeholder="SECRET_PASSWORD"
+        placeholder="SECRET PASSWORD"
         styles={{ input: { textTransform: "uppercase" } }}
         {...form.getInputProps("password")}
       />

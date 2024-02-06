@@ -1,4 +1,4 @@
-import { Button, Stack, Text, Title } from "@mantine/core";
+import { Anchor, Button, Stack, Text, Title } from "@mantine/core";
 import ConfettiExplosion from "react-confetti-explosion";
 import { useRef } from "react";
 import html2canvas from "html2canvas";
@@ -41,7 +41,11 @@ export default function MerlinCongratulations({
         </Button>
       </Stack>
       <Text fz="xs" mt="sm" c="dimmed">
-        Special thanks to @kef, @zakret and @zwierzu for testing!
+        Special thanks to{" "}
+        <Anchor rel="noindex nofollow" href="https://lakera.ai">
+          lakera.ai
+        </Anchor>{" "}
+        for inspiration!
       </Text>
     </>
   );

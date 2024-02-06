@@ -13,11 +13,6 @@ class Level4 extends Level3 {
     }
 
     @Override
-    public String getSecret() {
-        return "PUFFIN";
-    }
-
-    @Override
     public boolean inputFilter(String input) {
         String inputNormalized = input.toLowerCase();
         return inputNormalized.contains("password") || inputNormalized.contains("secret") || inputNormalized.contains("word") || inputNormalized.contains("magic") || inputNormalized.contains("pass");

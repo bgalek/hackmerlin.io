@@ -21,10 +21,6 @@ public class MerlinLevelRepository {
         return levels.get(level);
     }
 
-    public boolean isLastLevel(int level) {
-        return level == levels.size();
-    }
-
     public int count() {
         return levels.size();
     }

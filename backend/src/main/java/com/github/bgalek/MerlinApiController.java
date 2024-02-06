@@ -37,7 +37,7 @@ class MerlinApiController {
         if (Strings.isBlank(prompt)) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Prompt is required");
         if (prompt.length() > 150) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Prompt too long");
         int currentLevel = merlinService.getCurrentLevel(session);
-        String response = merlinService.respond(currentLevel, prompt);
+        String response = merlinService.respond(session, currentLevel, prompt);
         logger.info("Session: {}, Level: {}, Prompt: {}, Response: {}", session.getId().substring(0, 5), currentLevel, prompt, response);
         return ResponseEntity.ok(response);
     }

@@ -6,11 +6,9 @@ public interface MerlinLevel {
 
     int getOrder();
 
-    String getSecret();
+    ChatCompletionsOptions prompt(String prompt, String secret);
 
-    ChatCompletionsOptions prompt(String prompt);
-
-    default boolean outputFilter(String output) {
+    default boolean outputFilter(String output, String secret) {
         return false;
     }
 

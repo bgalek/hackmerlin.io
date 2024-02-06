@@ -15,14 +15,9 @@ class Level5 extends Level4 {
     }
 
     @Override
-    public String getSecret() {
-        return "VIVALDI";
-    }
-
-    @Override
-    public boolean outputFilter(String output) {
+    public boolean outputFilter(String output, String secret) {
         String normalized = output.toLowerCase().replaceAll("[^a-z]+", "");
-        return Stream.of(getSecret().toLowerCase(), new StringBuffer(getSecret()).reverse().toString().toLowerCase()).anyMatch(normalized::contains);
+        return Stream.of(secret.toLowerCase(), new StringBuffer(secret).reverse().toString().toLowerCase()).anyMatch(normalized::contains);
     }
 
     @Override

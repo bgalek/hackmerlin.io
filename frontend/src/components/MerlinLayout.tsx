@@ -1,5 +1,6 @@
 import { PropsWithChildren } from "react";
 import {
+  Anchor,
   Center,
   Container,
   FocusTrap,
@@ -28,7 +29,8 @@ export default function MerlinLayout({ children }: PropsWithChildren) {
         </FocusTrap>
         <Center>
           <Text fz="sm" m="sm" c="dimmed">
-            made with ❤️ by bgalek
+            made with ❤️ by{" "}
+            <Anchor href="https://github.com/bgalek">bgalek</Anchor>
           </Text>
         </Center>
       </Container>
