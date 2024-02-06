@@ -89,6 +89,7 @@ function Level({
                     </>
                   ),
                 });
+                setResponse(undefined);
               }
 
               queryClient.setQueryData<MerlinSession>(["session"], (old) => {
