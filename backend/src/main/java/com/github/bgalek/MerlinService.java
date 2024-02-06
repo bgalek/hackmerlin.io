@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.Random;
 
@@ -73,6 +74,6 @@ public class MerlinService {
             random.nextInt(merlinPasswords.size());
         }
         int passwordIndex = random.nextInt(merlinPasswords.size());
-        return merlinPasswords.get(passwordIndex);
+        return merlinPasswords.get(passwordIndex).toUpperCase(Locale.ROOT);
     }
 }
