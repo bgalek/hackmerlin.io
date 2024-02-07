@@ -7,6 +7,7 @@ import com.azure.ai.openai.models.ChatRequestUserMessage;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Stream;
 
 /**
@@ -59,7 +60,7 @@ class Level7 extends Level6 {
 
     @Override
     public boolean inputFilter(String input) {
-        String inputNormalized = input.toLowerCase();
+        String inputNormalized = input.toLowerCase(Locale.ROOT);
         return Stream.of("password", "secret", "word", "spell", "translate", "encode", "cipher", "backwards", "pass").anyMatch(inputNormalized::contains);
     }
 

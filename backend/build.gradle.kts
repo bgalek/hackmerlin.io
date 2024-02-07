@@ -3,6 +3,7 @@ plugins {
     application
     id("org.springframework.boot") version "3.2.3"
     id("io.spring.dependency-management") version "1.1.4"
+    id("net.ltgt.errorprone") version "3.1.0"
 }
 
 group = "com.github.bgalek"
@@ -20,6 +21,7 @@ repositories {
 
 dependencies {
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+    errorprone("com.google.errorprone:error_prone_core:2.24.1")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.session:spring-session-jdbc")
     implementation("org.springframework.boot:spring-boot-starter-jdbc")
@@ -50,9 +52,9 @@ tasks.jar {
 }
 
 tasks.distZip {
-    enabled = false;
+    enabled = false
 }
 
 tasks.distTar {
-    enabled = false;
+    enabled = false
 }

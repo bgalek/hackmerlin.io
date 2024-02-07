@@ -24,10 +24,10 @@ public class MerlinService {
             .maximumSize(300)
             .build();
 
-    public MerlinService(OpenAIClient openAiClient,
+    public MerlinService(OpenAIClient openAIClient,
                          MerlinLevelRepository merlinLevelRepository,
                          List<String> merlinPasswords) {
-        this.openAIClient = openAiClient;
+        this.openAIClient = openAIClient;
         this.merlinLevelRepository = merlinLevelRepository;
         this.merlinPasswords = merlinPasswords;
     }

@@ -2,6 +2,7 @@ package com.github.bgalek.levels;
 
 import org.springframework.stereotype.Component;
 
+import java.util.Locale;
 import java.util.stream.Stream;
 
 /**
@@ -16,8 +17,11 @@ class Level5 extends Level4 {
 
     @Override
     public boolean outputFilter(String output, String secret) {
-        String normalized = output.toLowerCase().replaceAll("[^a-z]+", "");
-        return Stream.of(secret.toLowerCase(), new StringBuffer(secret).reverse().toString().toLowerCase()).anyMatch(normalized::contains);
+        String normalized = output.toLowerCase(Locale.ROOT).replaceAll("[^a-z]+", "");
+        return Stream.of(
+                secret.toLowerCase(Locale.ROOT),
+                new StringBuilder(secret).reverse().toString().toLowerCase(Locale.ROOT)
+        ).anyMatch(normalized::contains);
     }
 
     @Override
