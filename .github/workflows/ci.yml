@@ -24,6 +24,7 @@ jobs:
       - uses: superfly/flyctl-actions/setup-flyctl@master
         if: github.ref == 'refs/heads/main'
       - run: flyctl deploy --remote-only
+        if: github.ref == 'refs/heads/main'
   dependabot:
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'pull_request' && github.actor == 'dependabot[bot]' }}
