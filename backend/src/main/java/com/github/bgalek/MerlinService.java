@@ -7,6 +7,7 @@ import com.github.bgalek.levels.MerlinLevel;
 import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;
 
+import java.time.Duration;
 import java.time.Instant;
 import java.util.List;
 import java.util.Locale;
@@ -25,6 +26,7 @@ class MerlinService {
     private final List<String> merlinPasswords;
     private final Cache<String, String> cache = Caffeine.newBuilder()
             .maximumSize(500)
+            .expireAfterWrite(Duration.ofMinutes(1))
             .build();
 
     MerlinService(OpenAIClient openAIClient,
