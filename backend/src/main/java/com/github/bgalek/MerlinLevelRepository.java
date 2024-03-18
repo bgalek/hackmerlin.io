@@ -7,21 +7,21 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class MerlinLevelRepository {
+class MerlinLevelRepository {
     private final Map<Integer, MerlinLevel> levels;
 
-    public MerlinLevelRepository(List<MerlinLevel> levels) {
+    MerlinLevelRepository(List<MerlinLevel> levels) {
         this.levels = levels.stream().collect(Collectors.toMap(MerlinLevel::getOrder, Function.identity()));
     }
 
-    public MerlinLevel getLevel(int level) {
+    MerlinLevel getLevel(int level) {
         if (level < 1 || level > levels.size()) {
-            throw new IllegalArgumentException("Level %d does not exist" .formatted(level));
+            throw new IllegalArgumentException("Level %d does not exist".formatted(level));
         }
         return levels.get(level);
     }
 
-    public int count() {
+    int count() {
         return levels.size();
     }
 }

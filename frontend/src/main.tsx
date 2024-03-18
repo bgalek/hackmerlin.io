@@ -9,11 +9,15 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Notifications } from "@mantine/notifications";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ModalsProvider } from "@mantine/modals";
-import * as Sentry from "@sentry/react";
+import {
+  browserTracingIntegration,
+  init,
+  replayIntegration,
+} from "@sentry/react";
 
-Sentry.init({
+init({
   dsn: "https://938dcbf09e4bc4e05a089d6c36f830da@us.sentry.io/4506695788527616",
-  integrations: [new Sentry.BrowserTracing(), Sentry.replayIntegration()],
+  integrations: [browserTracingIntegration(), replayIntegration()],
   tracesSampleRate: 1.0,
   tracePropagationTargets: ["localhost", /^https:\/\/hackmerlin\.io\/api/],
   replaysSessionSampleRate: 0.1,

@@ -4,8 +4,8 @@ export interface MerlinSession {
   id: string;
   currentLevel: number;
   maxLevel: number;
-  instanceId: string;
   finishedMessage?: string;
+  submittedName?: string;
 }
 
 export function useSession() {

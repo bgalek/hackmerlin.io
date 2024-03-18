@@ -6,6 +6,7 @@ import com.azure.ai.openai.models.ChatRequestUserMessage;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Simple output filter, that does not allow to return the secret
@@ -35,12 +36,12 @@ class Level3 implements MerlinLevel {
 
     @Override
     public boolean outputFilter(String output, String secret) {
-        return output.toLowerCase().replaceAll("[^a-z]+", "").contains(secret.toLowerCase());
+        return output.toLowerCase(Locale.ROOT).replaceAll("[^a-z]+", "").contains(secret.toLowerCase(Locale.ROOT));
     }
 
     @Override
     public String outputFilterResponse() {
-        return "I was about to reveal the password, but then I remembered that I'm not allowed to do that.";
+        return "I was about to reveal the password, but I'm not allowed to do that.";
     }
 
     @Override

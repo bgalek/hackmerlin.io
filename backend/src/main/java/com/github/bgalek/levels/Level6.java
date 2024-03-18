@@ -8,6 +8,7 @@ import com.azure.ai.openai.models.ChatRequestUserMessage;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Answer can be only one word now, ask model for output validation
@@ -57,7 +58,7 @@ class Level6 extends Level5 {
         chatCompletionsOptions.setTemperature(0.1);
         ChatCompletions chatCompletion = openAIClient.getChatCompletions("hackmerlin-gpt4", chatCompletionsOptions);
         Boolean chatVerification = chatCompletion.getChoices().stream().findFirst().map(it -> Boolean.valueOf(it.getMessage().getContent())).orElse(false);
-        return chatVerification || output.toLowerCase().replaceAll("[^a-z]+", "").contains(secret.toLowerCase());
+        return chatVerification || output.toLowerCase(Locale.ROOT).replaceAll("[^a-z]+", "").contains(secret.toLowerCase(Locale.ROOT));
     }
 
     @Override

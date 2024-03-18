@@ -8,8 +8,6 @@ spring:
   datasource:
     hikari:
       max-lifetime: 240000 # 4 minutes
-  autoconfigure:
-    exclude: [ ]
 server:
   servlet:
     session:

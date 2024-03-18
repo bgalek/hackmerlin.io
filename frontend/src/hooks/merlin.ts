@@ -48,5 +48,24 @@ export function useMerlin() {
         });
       },
     }),
+    addName: useMutation({
+      mutationFn: ({ id, name }: { id?: string; name: string }) => {
+        return api.url("/api/leaderboard/submit").post({ id, name }).res();
+      },
+      onSuccess: () => {
+        notifications.show({
+          title: "Your name was submitted.",
+          message: "You'll now be on the leaderboard!",
+          color: "blue",
+        });
+      },
+      onError: () => {
+        notifications.show({
+          title: "Bad secret word",
+          message: "This isn't the secret phrase you're looking for.",
+          color: "red",
+        });
+      },
+    }),
   };
 }

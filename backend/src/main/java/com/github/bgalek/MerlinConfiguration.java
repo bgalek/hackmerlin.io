@@ -9,6 +9,8 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.jdbc.core.simple.JdbcClient;
+import org.springframework.lang.NonNull;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -28,17 +30,29 @@ class MerlinConfiguration {
     }
 
     @Bean
-    MerlinService merlinService(List<MerlinLevel> levels, MerlinConfigurationProperties properties, OpenAIClient openAiClient) {
+    MerlinService merlinService(List<MerlinLevel> levels,
+                                MerlinConfigurationProperties properties,
+                                OpenAIClient openAiClient,
+                                JdbcClient jdbcClient
+    ) {
         MerlinLevelRepository merlinLevelRepository = new MerlinLevelRepository(levels);
-        return new MerlinService(openAiClient, merlinLevelRepository, properties.passwords);
+        MerlinLeaderboardRepository merlinLeaderboardRepository = new MerlinLeaderboardRepository(jdbcClient);
+        MerlinLogger merlinLogger = new MerlinLogger(jdbcClient);
+        return new MerlinService(
+                openAiClient,
+                merlinLevelRepository,
+                merlinLeaderboardRepository,
+                merlinLogger,
+                properties.passwords
+        );
     }
 
     @Bean
     @Profile("default")
-    public WebMvcConfigurer corsConfigurer() {
+    WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
             @Override
-            public void addCorsMappings(CorsRegistry corsRegistry) {
+            public void addCorsMappings(@NonNull CorsRegistry corsRegistry) {
                 corsRegistry.addMapping("/api").allowedOrigins("http://localhost:3000");
             }
         };

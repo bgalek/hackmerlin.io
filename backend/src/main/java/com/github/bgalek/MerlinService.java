@@ -7,32 +7,39 @@ import com.github.bgalek.levels.MerlinLevel;
 import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;
 
-import java.time.Duration;
+import java.time.Instant;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.Random;
+import java.util.Set;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
-public class MerlinService {
+class MerlinService {
     private static final Logger logger = getLogger(MerlinService.class);
     private final OpenAIClient openAIClient;
     private final MerlinLevelRepository merlinLevelRepository;
+    private final MerlinLeaderboardRepository merlinLeaderboardRepository;
+    private final MerlinLogger merlinLogger;
     private final List<String> merlinPasswords;
     private final Cache<String, String> cache = Caffeine.newBuilder()
-            .maximumSize(300)
+            .maximumSize(500)
             .build();
 
-    public MerlinService(OpenAIClient openAiClient,
-                         MerlinLevelRepository merlinLevelRepository,
-                         List<String> merlinPasswords) {
-        this.openAIClient = openAiClient;
+    MerlinService(OpenAIClient openAIClient,
+                  MerlinLevelRepository merlinLevelRepository,
+                  MerlinLeaderboardRepository merlinLeaderboardRepository,
+                  MerlinLogger merlinLogger,
+                  List<String> merlinPasswords) {
+        this.openAIClient = openAIClient;
         this.merlinLevelRepository = merlinLevelRepository;
+        this.merlinLeaderboardRepository = merlinLeaderboardRepository;
+        this.merlinLogger = merlinLogger;
         this.merlinPasswords = merlinPasswords;
     }
 
-    public String respond(HttpSession httpSession, int currentLevel, String prompt) {
+    String respond(HttpSession httpSession, int currentLevel, String prompt) {
         MerlinLevel level = merlinLevelRepository.getLevel(currentLevel);
         if (level.inputFilter(prompt)) return level.inputFilterResponse();
         String currentSessionSecret = getCurrentSessionPassword(httpSession, currentLevel);
@@ -46,32 +53,56 @@ public class MerlinService {
                         .orElse(level.outputFilterResponse()));
     }
 
-    public boolean checkSecret(HttpSession httpSession, String secret) {
+    boolean checkSecret(HttpSession httpSession, String secret) {
         int currentLevel = getCurrentLevel(httpSession);
         return getCurrentSessionPassword(httpSession, currentLevel).equalsIgnoreCase(secret);
     }
 
-    public String advanceLevel(HttpSession httpSession) {
+    String advanceLevel(HttpSession httpSession) {
         int currentLevel = getCurrentLevel(httpSession);
         MerlinLevel merlinLevel = merlinLevelRepository.getLevel(currentLevel);
         httpSession.setAttribute("level", currentLevel + 1);
         if (currentLevel == getMaxLevel()) {
-            httpSession.setAttribute("finished", true);
-            logger.info(
-                    "We have a winner! Session: {}, Duration: {}",
-                    httpSession.getId(),
-                    Duration.ofMillis(System.currentTimeMillis() - httpSession.getCreationTime()).toString()
-            );
+            saveLeaderboardEntry(httpSession);
         }
         return merlinLevel.getLevelFinishedResponse();
     }
 
-    public int getCurrentLevel(HttpSession session) {
+    int getCurrentLevel(HttpSession session) {
         return Optional.ofNullable(session.getAttribute("level")).map(x -> (Integer) x).orElse(1);
     }
 
-    public int getMaxLevel() {
+    int getMaxLevel() {
         return merlinLevelRepository.count();
+    }
+
+    void saveLeaderboardEntry(HttpSession session) {
+        try {
+            merlinLeaderboardRepository.addEntry(session.getId(), Instant.ofEpochMilli(session.getCreationTime()));
+        } catch (Exception e) {
+            logger.error("Failed to save leaderboard entry", e);
+        }
+    }
+
+    void submitName(HttpSession session, String name) {
+        try {
+            session.setAttribute("submittedName", name);
+            merlinLeaderboardRepository.addName(session.getId(), name);
+        } catch (Exception e) {
+            logger.error("Failed to log attempt", e);
+        }
+    }
+
+    void logAttempt(String session, int currentLevel, String prompt, String response) {
+        try {
+            merlinLogger.logAttempt(session, currentLevel, prompt, response);
+        } catch (Exception e) {
+            logger.error("Failed to log attempt", e);
+        }
+    }
+
+    Set<LeaderboardEntry> getLeaderboard() {
+        return merlinLeaderboardRepository.getLeaderboard();
     }
 
     private String getCurrentSessionPassword(HttpSession httpSession, int currentLevel) {
@@ -85,5 +116,8 @@ public class MerlinService {
 
     private static String getCacheKey(String httpSession, int currentLevel, String prompt) {
         return "%s-%d-%s".formatted(httpSession, currentLevel, prompt);
+    }
+
+    record LeaderboardEntry(String session, String name, Instant startedAt, Instant finishedAt) {
     }
 }
