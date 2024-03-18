@@ -21,7 +21,7 @@ repositories {
 
 dependencies {
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
-    errorprone("com.google.errorprone:error_prone_core:2.24.1")
+    errorprone("com.google.errorprone:error_prone_core:2.26.1")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.session:spring-session-jdbc")
     implementation("org.springframework.boot:spring-boot-starter-jdbc")
