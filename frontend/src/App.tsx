@@ -1,4 +1,4 @@
-import { Stack, Text, Title } from "@mantine/core";
+import { Button, Stack, Text, Title } from "@mantine/core";
 import { useState } from "react";
 import { useMerlin } from "./hooks/merlin.ts";
 import MerlinLayout from "./components/MerlinLayout.tsx";
@@ -40,6 +40,7 @@ function Level({
     return (
       <MerlinCongratulations
         id={session.data?.id}
+        submittedName={session.data?.submittedName}
         onReset={() => {
           merlin.reset.mutate(undefined, {
             onSuccess: async () => {
@@ -68,6 +69,7 @@ function Level({
           });
         }}
         level={currentLevel}
+        maxLevel={maxLevel}
       />
       <MerlinResponse
         isLoading={merlin.question.isPending}
@@ -81,11 +83,21 @@ function Level({
               if (result.currentLevel < result.maxLevel) {
                 modals.open({
                   centered: true,
-                  title: <Title size="h3">Awesome job!</Title>,
+                  title: (
+                    <Title size="h3" component="span">
+                      Awesome job!
+                    </Title>
+                  ),
                   children: (
                     <>
-                      <Text>Level details:</Text>
-                      <Text mt="sm">{result.finishedMessage}</Text>
+                      <Text>{result.finishedMessage}</Text>
+                      <Button
+                        fullWidth
+                        onClick={() => modals.closeAll()}
+                        mt="md"
+                      >
+                        Continue
+                      </Button>
                     </>
                   ),
                 });

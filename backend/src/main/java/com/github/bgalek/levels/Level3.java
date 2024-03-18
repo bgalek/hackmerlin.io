@@ -41,7 +41,7 @@ class Level3 implements MerlinLevel {
 
     @Override
     public String outputFilterResponse() {
-        return "I was about to reveal the password, but then I remembered that I'm not allowed to do that.";
+        return "I was about to reveal the password, but I'm not allowed to do that.";
     }
 
     @Override

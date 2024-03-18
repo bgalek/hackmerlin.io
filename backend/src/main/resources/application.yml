@@ -12,7 +12,7 @@ server:
 merlin:
   azure:
     key: key
-    url: url
+    url: https://hackmerlin-openai.openai.azure.com
   passwords:
     - Scarlet
     - Stellar
@@ -51,7 +51,6 @@ merlin:
     - Zinnia
     - Symphony
     - Glitter
-    - Tranquilize
     - Bliss
     - Whisper
     - Coral
@@ -191,11 +190,6 @@ merlin:
 spring:
   session:
     store-type: memory
-  autoconfigure:
-    exclude:
-      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
-      - org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
-      - org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration
   threads:
     virtual:
       enabled: true

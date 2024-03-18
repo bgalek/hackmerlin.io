@@ -1,15 +1,17 @@
 import { useForm } from "@mantine/form";
-import { Button, Textarea, Title } from "@mantine/core";
+import { Button, Progress, Textarea, Title } from "@mantine/core";
 import { getHotkeyHandler } from "@mantine/hooks";
 
 interface MerlinPromptProps {
   level: number;
+  maxLevel: number;
   onSubmit: (prompt: string, reset: () => void) => void;
   disabled?: boolean;
 }
 
 export default function MerlinPrompt({
   level,
+  maxLevel,
   onSubmit,
   disabled,
 }: MerlinPromptProps) {
@@ -30,6 +32,7 @@ export default function MerlinPrompt({
   return (
     <form onSubmit={handleSubmit}>
       <Title size="h4">Level {level}</Title>
+      <Progress mt="xs" value={(level / (maxLevel + 1)) * 100} size="xs" />
       <Textarea
         data-autofocus
         mt="sm"
