@@ -25,7 +25,7 @@
     "react": "^18.2.0",
     "react-confetti-explosion": "^2.1.2",
     "react-dom": "^18.2.0",
-    "wretch": "^2.8.0"
+    "wretch": "^2.8.1"
   },
   "devDependencies": {
     "@tanstack/eslint-plugin-query": "^5.28.6",
