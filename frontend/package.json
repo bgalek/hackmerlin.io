@@ -18,7 +18,7 @@
     "@mantine/form": "^7.7.0",
     "@mantine/hooks": "^7.5.1",
     "@mantine/modals": "^7.5.1",
-    "@mantine/notifications": "^7.5.1",
+    "@mantine/notifications": "^7.7.1",
     "@sentry/react": "^7.108.0",
     "@tanstack/react-query": "^5.28.9",
     "@tanstack/react-query-devtools": "^5.28.13",
