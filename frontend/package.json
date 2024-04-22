@@ -20,7 +20,7 @@
     "@mantine/modals": "^7.7.1",
     "@mantine/notifications": "^7.7.1",
     "@sentry/react": "^7.111.0",
-    "@tanstack/react-query": "^5.29.2",
+    "@tanstack/react-query": "^5.31.0",
     "@tanstack/react-query-devtools": "^5.29.2",
     "react": "^18.2.0",
     "react-confetti-explosion": "^2.1.2",
