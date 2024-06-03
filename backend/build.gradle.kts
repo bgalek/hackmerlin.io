@@ -3,7 +3,7 @@ plugins {
     application
     id("org.springframework.boot") version "3.3.0"
     id("io.spring.dependency-management") version "1.1.5"
-    id("net.ltgt.errorprone") version "3.1.0"
+    id("net.ltgt.errorprone") version "4.0.0"
 }
 
 group = "com.github.bgalek"
