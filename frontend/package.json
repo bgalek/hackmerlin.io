@@ -21,7 +21,7 @@
     "@mantine/notifications": "^7.7.1",
     "@sentry/react": "^8.9.2",
     "@tanstack/react-query": "^5.45.1",
-    "@tanstack/react-query-devtools": "^5.40.1",
+    "@tanstack/react-query-devtools": "^5.45.1",
     "react": "^18.3.1",
     "react-confetti-explosion": "^2.1.2",
     "react-dom": "^18.3.1",
