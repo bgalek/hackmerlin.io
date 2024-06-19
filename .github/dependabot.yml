@@ -13,11 +13,11 @@ updates:
     directory: "/frontend"
     schedule:
       interval: "weekly"
+    groups:
+      dependencies:
+        patterns: 
+          - "*"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "weekly"
-groups:
-   dependencies:
-    patterns: 
-      - "*"
