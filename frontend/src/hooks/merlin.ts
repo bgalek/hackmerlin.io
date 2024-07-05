@@ -67,5 +67,20 @@ export function useMerlin() {
         });
       },
     }),
+    getLeaderboard: () => {
+      const data: Promise<LeaderboardEntry[]> = api
+        .url("/api/leaderboard")
+        .errorType("json")
+        .get()
+        .json();
+      return data;
+    },
   };
+}
+
+interface LeaderboardEntry {
+  id: string;
+  name: string;
+  startedAt: string;
+  finishedAt: string;
 }
