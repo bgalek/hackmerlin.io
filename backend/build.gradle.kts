@@ -27,7 +27,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-jdbc")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("io.sentry:sentry-spring-boot-starter-jakarta:7.10.0")
-    implementation("com.azure:azure-ai-openai:1.0.0-beta.9")
+    implementation("com.azure:azure-ai-openai:1.0.0-beta.10")
     implementation("com.github.ben-manes.caffeine:caffeine:3.1.8")
     runtimeOnly("io.micrometer:micrometer-registry-prometheus:1.13.1")
     runtimeOnly("org.postgresql:postgresql")
