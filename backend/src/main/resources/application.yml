@@ -188,6 +188,9 @@ merlin:
     - Pirate
     - Quiver
 spring:
+  sql:
+    init:
+      mode: always
   session:
     store-type: memory
   threads:

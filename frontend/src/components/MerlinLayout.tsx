@@ -47,10 +47,13 @@ export default function MerlinLayout({ children }: PropsWithChildren) {
           <Modal
             opened={leaderboardOpen}
             onClose={toggleLeaderboard}
-            title="People who beaten Merlin"
+            title="People who beat Merlin"
             centered
           >
             <Leaderboard />
+            <Text fz="sm" m="sm" c="dimmed">
+              The leaderboard was reset August 2024
+            </Text>
           </Modal>
         </Center>
         <Center>
