@@ -13,3 +13,5 @@ server:
     session:
       cookie:
         secure: true
+  error:
+    include-message: never
