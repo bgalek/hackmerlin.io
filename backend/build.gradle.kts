@@ -29,7 +29,7 @@ dependencies {
     implementation("io.sentry:sentry-spring-boot-starter-jakarta:7.18.0")
     implementation("com.azure:azure-ai-openai:1.0.0-beta.12")
     implementation("com.github.ben-manes.caffeine:caffeine:3.1.8")
-    runtimeOnly("io.micrometer:micrometer-registry-prometheus:1.13.6")
+    runtimeOnly("io.micrometer:micrometer-registry-prometheus:1.14.1")
     runtimeOnly("org.postgresql:postgresql")
 }
 
