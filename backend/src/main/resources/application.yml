@@ -196,6 +196,8 @@ spring:
   threads:
     virtual:
       enabled: true
+  datasource:
+    url: jdbc:hsqldb:mem:testdb;sql.syntax_pgs=true
 management:
   endpoints:
     web:

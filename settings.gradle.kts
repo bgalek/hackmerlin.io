@@ -4,5 +4,11 @@ plugins {
 
 rootProject.name = "merlin"
 
+dependencyResolutionManagement {
+    repositories {
+        mavenCentral()
+    }
+}
+
 include("frontend")
 include("backend")

@@ -1,60 +1,23 @@
 plugins {
     java
-    application
-    id("org.springframework.boot") version "3.4.1"
-    id("io.spring.dependency-management") version "1.1.7"
-    id("net.ltgt.errorprone") version "4.1.0"
-}
-
-group = "com.github.bgalek"
-version = "1.0.0"
-
-java {
-    toolchain {
-        languageVersion.set(JavaLanguageVersion.of(21))
-    }
-}
-
-repositories {
-    mavenCentral()
+    alias(libs.plugins.error.prone)
 }
 
 dependencies {
-    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
-    errorprone("com.google.errorprone:error_prone_core:2.36.0")
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.session:spring-session-jdbc")
-    implementation("org.springframework.boot:spring-boot-starter-jdbc")
-    implementation("org.springframework.boot:spring-boot-starter-actuator")
-    implementation("io.sentry:sentry-spring-boot-starter-jakarta:7.20.0")
-    implementation("com.azure:azure-ai-openai:1.0.0-beta.13")
-    implementation("com.github.ben-manes.caffeine:caffeine:3.1.8")
-    runtimeOnly("io.micrometer:micrometer-registry-prometheus:1.14.2")
-    runtimeOnly("org.postgresql:postgresql")
-}
-
-configurations {
-    compileOnly {
-        extendsFrom(configurations.annotationProcessor.get())
-    }
+    implementation(platform(libs.spring.boot.dependencies))
+    errorprone(libs.error.prone)
+    implementation(libs.spring.boot.starter.web)
+    implementation(libs.spring.session.jdbc)
+    implementation(libs.spring.boot.starter.jdbc)
+    implementation(libs.spring.boot.starter.actuator)
+    implementation(libs.sentry.spring.boot.starter)
+    implementation(libs.azure.ai.openai)
+    implementation(libs.caffeine)
+    runtimeOnly(libs.micrometer.registry.prometheus)
+    runtimeOnly(libs.postgresql)
+    runtimeOnly(libs.hsqldb)
 }
 
 tasks.withType<Test> {
     useJUnitPlatform()
-}
-
-tasks.processResources {
-    dependsOn(":frontend:build")
-}
-
-tasks.jar {
-    enabled = false
-}
-
-tasks.distZip {
-    enabled = false
-}
-
-tasks.distTar {
-    enabled = false
 }

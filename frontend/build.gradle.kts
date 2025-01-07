@@ -1,20 +1,42 @@
+import com.github.gradle.node.npm.task.NpmTask
+
 plugins {
-    id("org.siouan.frontend-jdk11") version "6.0.0"
+    `java-library`
+    id("com.github.node-gradle.node") version "7.1.0"
 }
 
-frontend {
-    nodeVersion.set("20.5.1")
-    assembleScript.set("run build")
-    cleanScript.set("run clean")
-    checkScript.set("run check")
-    nodeDistributionProvided.set(true)
+node {
+    download = true
+    version = "23.5.0"
 }
 
 tasks.build {
-    dependsOn("copyDistToBackend")
+    dependsOn(tasks.named("npmBuild"))
 }
 
-tasks.create("copyDistToBackend", Copy::class) {
-    from("./build/dist")
-    into("../backend/build/resources/main/static")
+tasks.test {
+    dependsOn(tasks.named("npmTest"))
+}
+
+tasks.register<NpmTask>("npmBuild") {
+    dependsOn(tasks.npmInstall)
+    args.set(listOf("run", "build"))
+    inputs.dir(project.fileTree("src").exclude("**/*.test.ts"))
+    inputs.dir(project.fileTree("public"))
+    inputs.files("*.html", "*.json", "*.ts", "*.js")
+    outputs.dir(project.layout.buildDirectory.dir("dist"))
+    dependsOn(tasks.named("npmTest"))
+}
+
+tasks.register<NpmTask>("npmTest") {
+    args.set(listOf("run", "test"))
+    inputs.dir(project.fileTree("src"))
+    inputs.dir(project.fileTree("public"))
+    inputs.files("*.html", "*.json", "*.ts", "*.js")
+    outputs.upToDateWhen { true }
+}
+
+tasks.jar {
+    dependsOn(tasks.named("npmBuild"))
+    from(project.layout.buildDirectory.dir("dist"))
 }

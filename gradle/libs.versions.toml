@@ -1,0 +1,25 @@
+[versions]
+azure-ai-openai = "1.0.0-beta.13"
+caffeine = "3.1.8"
+error-prone-plugin = "4.1.0"
+error-prone-core = "2.36.0"
+micrometer = "1.14.2"
+sentry = "7.20.0"
+spring-boot = "3.4.1"
+
+[libraries]
+azure-ai-openai = { module = "com.azure:azure-ai-openai", version.ref = "azure-ai-openai" }
+caffeine = { module = "com.github.ben-manes.caffeine:caffeine", version.ref = "caffeine" }
+hsqldb = { module = "org.hsqldb:hsqldb" }
+micrometer-registry-prometheus = { module = "io.micrometer:micrometer-registry-prometheus", version.ref = "micrometer" }
+postgresql = { module = "org.postgresql:postgresql" }
+sentry-spring-boot-starter = { module = "io.sentry:sentry-spring-boot-starter-jakarta", version.ref = "sentry" }
+spring-boot-dependencies = { module = "org.springframework.boot:spring-boot-dependencies", version.ref = "spring-boot" }
+spring-boot-starter-actuator = { module = "org.springframework.boot:spring-boot-starter-actuator" }
+spring-boot-starter-jdbc = { module = "org.springframework.boot:spring-boot-starter-jdbc" }
+spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" }
+spring-session-jdbc = { module = "org.springframework.session:spring-session-jdbc" }
+error-prone = { module = "com.google.errorprone:error_prone_core", version.ref = "error-prone-core" }
+
+[plugins]
+error-prone = { id = "net.ltgt.errorprone", version.ref = "error-prone-plugin" }
