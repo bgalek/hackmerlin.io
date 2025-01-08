@@ -24,3 +24,5 @@ Start the application:
 ```sh
 ./gradlew run
 ```
+
+and visit `http://localhost:8080`
