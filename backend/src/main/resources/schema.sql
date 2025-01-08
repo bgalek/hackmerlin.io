@@ -12,6 +12,6 @@ create table IF NOT EXISTS logs
     id          serial primary key,
     session     char(36)  not null,
     level       int not null,
-    prompt      char(200) not null,
-    response    char(200) not null
+    prompt      text not null,
+    response    text not null
 );

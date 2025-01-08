@@ -1,6 +1,6 @@
 plugins {
     application
-    id("org.springframework.boot") version "3.3.2"
+    alias(libs.plugins.spring.boot)
 }
 
 application {
@@ -16,7 +16,7 @@ allprojects {
     apply(plugin = "java")
     java {
         toolchain {
-            languageVersion.set(JavaLanguageVersion.of(23))
+            languageVersion.set(JavaLanguageVersion.of(21))
         }
     }
 }
