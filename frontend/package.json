@@ -14,40 +14,40 @@
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
-    "@mantine/core": "^7.15.3",
-    "@mantine/form": "^7.15.3",
-    "@mantine/hooks": "^7.15.3",
-    "@mantine/modals": "^7.15.3",
-    "@mantine/notifications": "^7.15.3",
-    "@sentry/react": "^8.48.0",
-    "@tanstack/react-query": "^5.62.16",
-    "@tanstack/react-query-devtools": "^5.62.16",
-    "react": "^18.3.1",
+    "@mantine/core": "^7.17.1",
+    "@mantine/form": "^7.17.1",
+    "@mantine/hooks": "^7.17.1",
+    "@mantine/modals": "^7.17.1",
+    "@mantine/notifications": "^7.17.1",
+    "@sentry/react": "^9.3.0",
+    "@tanstack/react-query": "^5.67.0",
+    "@tanstack/react-query-devtools": "^5.67.0",
+    "react": "^19.0.0",
     "react-confetti-explosion": "^2.1.2",
-    "react-dom": "^18.3.1",
+    "react-dom": "^19.0.0",
     "wretch": "^2.11.0"
   },
   "devDependencies": {
-    "@tanstack/eslint-plugin-query": "^5.62.16",
-    "@types/react": "^18.3.18",
-    "@types/react-dom": "^18.3.5",
-    "@typescript-eslint/eslint-plugin": "^8.19.1",
-    "@typescript-eslint/parser": "^8.19.1",
+    "@tanstack/eslint-plugin-query": "^5.66.1",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "@typescript-eslint/eslint-plugin": "^8.25.0",
+    "@typescript-eslint/parser": "^8.25.0",
     "@vitejs/plugin-react": "^4.3.4",
-    "eslint": "^9.17.0",
-    "eslint-plugin-prettier": "^5.2.1",
-    "eslint-plugin-react-hooks": "^5.1.0",
-    "eslint-plugin-react-refresh": "^0.4.16",
+    "eslint": "^9.21.0",
+    "eslint-plugin-prettier": "^5.2.3",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.19",
     "husky": "^9.1.7",
-    "lint-staged": "^15.3.0",
-    "prettier": "3.4.2",
-    "typescript": "^5.7.2",
-    "vite": "^6.0.11"
+    "lint-staged": "^15.4.3",
+    "prettier": "3.5.3",
+    "typescript": "^5.8.2",
+    "vite": "^6.2.0"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
   },
   "optionalDependencies": {
-    "@rollup/rollup-linux-x64-gnu": "^4.30.1"
+    "@rollup/rollup-linux-x64-gnu": "^4.34.9"
   }
 }
