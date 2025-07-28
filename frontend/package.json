@@ -19,12 +19,12 @@
     "@mantine/hooks": "^8.2.1",
     "@mantine/modals": "^8.2.1",
     "@mantine/notifications": "^8.2.1",
-    "@sentry/react": "^9.40.0",
+    "@sentry/react": "^9.42.1",
     "@tanstack/react-query": "^5.83.0",
     "@tanstack/react-query-devtools": "^5.83.0",
-    "react": "^19.1.0",
+    "react": "^19.1.1",
     "react-confetti-explosion": "^3.0.3",
-    "react-dom": "^19.1.0",
+    "react-dom": "^19.1.1",
     "wretch": "^2.11.0"
   },
   "devDependencies": {
@@ -34,7 +34,7 @@
     "@typescript-eslint/eslint-plugin": "^8.38.0",
     "@typescript-eslint/parser": "^8.19.1",
     "@vitejs/plugin-react": "^4.7.0",
-    "eslint": "^9.31.0",
+    "eslint": "^9.32.0",
     "eslint-plugin-prettier": "^5.5.3",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
@@ -42,12 +42,12 @@
     "lint-staged": "^16.1.2",
     "prettier": "3.6.2",
     "typescript": "^5.8.3",
-    "vite": "^7.0.5"
+    "vite": "^7.0.6"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
   },
   "optionalDependencies": {
-    "@rollup/rollup-linux-x64-gnu": "^4.45.1"
+    "@rollup/rollup-linux-x64-gnu": "^4.46.1"
   }
 }
