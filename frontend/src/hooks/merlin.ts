@@ -1,9 +1,20 @@
 import { useMutation } from "@tanstack/react-query";
-import wretch, { WretchError } from "wretch";
+import wretch from "wretch";
 import { MerlinSession } from "./session.ts";
 import { notifications } from "@mantine/notifications";
 
-const api = wretch().errorType("json");
+interface ApiError {
+  title: string;
+  message?: string;
+}
+
+const api = wretch().customError<ApiError>(async (error, response) => {
+  const json = await response.json();
+  return {
+    title: json.error || error.response.statusText,
+    message: json.message,
+  };
+});
 
 export function useMerlin() {
   return {
@@ -12,13 +23,12 @@ export function useMerlin() {
         api
           .url("/api/question")
           .headers({ "Content-Type": "text/plain" })
-          .errorType("json")
           .post(prompt)
           .text(),
-      onError: (error: WretchError) => {
+      onError: (error: ApiError) => {
         notifications.show({
-          title: error.json.error || error.response.statusText,
-          message: error.json.message,
+          title: error.title,
+          message: error.message,
           color: "red",
         });
       },
@@ -70,7 +80,6 @@ export function useMerlin() {
     getLeaderboard: () => {
       const data: Promise<LeaderboardEntry[]> = api
         .url("/api/leaderboard")
-        .errorType("json")
         .get()
         .json();
       return data;
