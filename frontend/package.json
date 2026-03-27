@@ -14,40 +14,40 @@
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
-    "@mantine/core": "^8.3.14",
-    "@mantine/form": "^8.3.14",
-    "@mantine/hooks": "^8.3.14",
-    "@mantine/modals": "^8.3.14",
-    "@mantine/notifications": "^8.3.14",
-    "@sentry/react": "^10.38.0",
-    "@tanstack/react-query": "^5.90.20",
-    "@tanstack/react-query-devtools": "^5.91.3",
+    "@mantine/core": "^8.3.18",
+    "@mantine/form": "^8.3.18",
+    "@mantine/hooks": "^8.3.18",
+    "@mantine/modals": "^8.3.18",
+    "@mantine/notifications": "^8.3.18",
+    "@sentry/react": "^10.46.0",
+    "@tanstack/react-query": "^5.95.2",
+    "@tanstack/react-query-devtools": "^5.95.2",
     "react": "^19.2.4",
     "react-confetti-explosion": "^3.0.3",
     "react-dom": "^19.2.4",
-    "wretch": "^3.0.6"
+    "wretch": "^3.0.7"
   },
   "devDependencies": {
-    "@tanstack/eslint-plugin-query": "^5.91.4",
-    "@types/react": "^19.2.10",
+    "@tanstack/eslint-plugin-query": "^5.95.2",
+    "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
-    "@typescript-eslint/eslint-plugin": "^8.54.0",
+    "@typescript-eslint/eslint-plugin": "^8.57.2",
     "@typescript-eslint/parser": "^8.19.1",
-    "@vitejs/plugin-react": "^5.1.3",
-    "eslint": "^9.39.2",
+    "@vitejs/plugin-react": "^6.0.1",
+    "eslint": "^10.1.0",
     "eslint-plugin-prettier": "^5.5.5",
     "eslint-plugin-react-hooks": "^7.0.1",
-    "eslint-plugin-react-refresh": "^0.5.0",
+    "eslint-plugin-react-refresh": "^0.5.2",
     "husky": "^9.1.7",
-    "lint-staged": "^16.2.7",
+    "lint-staged": "^16.4.0",
     "prettier": "3.8.1",
-    "typescript": "^5.9.3",
-    "vite": "^7.3.1"
+    "typescript": "^6.0.2",
+    "vite": "^8.0.3"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
   },
   "optionalDependencies": {
-    "@rollup/rollup-linux-x64-gnu": "^4.57.1"
+    "@rollup/rollup-linux-x64-gnu": "^4.60.0"
   }
 }
