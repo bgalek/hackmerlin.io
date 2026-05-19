@@ -20,15 +20,15 @@
     "@mantine/modals": "^9.2.1",
     "@mantine/notifications": "^9.2.1",
     "@sentry/react": "^10.53.1",
-    "@tanstack/react-query": "^5.100.10",
-    "@tanstack/react-query-devtools": "^5.100.10",
+    "@tanstack/react-query": "^5.100.11",
+    "@tanstack/react-query-devtools": "^5.100.11",
     "react": "^19.2.6",
     "react-confetti-explosion": "^3.0.3",
     "react-dom": "^19.2.6",
     "wretch": "^3.0.7"
   },
   "devDependencies": {
-    "@tanstack/eslint-plugin-query": "^5.100.10",
+    "@tanstack/eslint-plugin-query": "^5.100.11",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@typescript-eslint/eslint-plugin": "^8.59.4",
