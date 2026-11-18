@@ -6,8 +6,8 @@ plugins {
 dependencies {
     implementation(platform(libs.spring.boot.dependencies))
     errorprone(libs.error.prone)
-    implementation(libs.spring.boot.starter.web)
-    implementation(libs.spring.session.jdbc)
+    implementation(libs.spring.boot.starter.webmvc)
+    implementation(libs.spring.boot.starter.session.jdbc)
     implementation(libs.spring.boot.starter.jdbc)
     implementation(libs.spring.boot.starter.actuator)
     implementation(libs.sentry.spring.boot.starter)
